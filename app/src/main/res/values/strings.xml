@@ -12,4 +12,7 @@
     <string name="flight_status_tracker_btn">Flight Status Tracker</string>
     <string name="nyt_article_search_btn">NYT Article Search</string>
 
+    <!--activity_merriam_webster_dictionary.xml-->
+    <string name="dummy_title">Hello world</string>
+
 </resources>

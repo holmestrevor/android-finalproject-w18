@@ -1,29 +1,32 @@
 package com.example.androidfinalprojectw18.websterdictionary.listview;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
-public class DictionaryItemAdapter extends BaseAdapter {
+import com.example.androidfinalprojectw18.R;
 
-    @Override
-    public int getCount() {
-        return 0;
-    }
+import java.util.ArrayList;
+import java.util.Locale;
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
+public class DictionaryItemAdapter extends ArrayAdapter<Definition> {
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
+    public DictionaryItemAdapter(Context ctx, ArrayList<Definition> objects) {
+        super(ctx, 0, objects);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        Definition d = getItem(position);
+
+        if(convertView==null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.dictionary_item, parent, false);
+        }
+
+        return convertView;
     }
 
 }
