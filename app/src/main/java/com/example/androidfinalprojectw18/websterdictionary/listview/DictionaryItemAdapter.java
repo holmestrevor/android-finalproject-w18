@@ -10,17 +10,28 @@ import android.widget.TextView;
 import com.example.androidfinalprojectw18.R;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class DictionaryItemAdapter extends ArrayAdapter<Definition> {
+public class DictionaryItemAdapter extends ArrayAdapter<DictionaryItem> {
 
-    public DictionaryItemAdapter(Context ctx, ArrayList<Definition> objects) {
+    /**
+     * Constructor for DictionaryItemAdapter. Takes a context object and an arraylist of DictionaryItem objects as arguments.
+     * @param ctx
+     * @param objects Arraylist of DictionaryItem objects to be passed.
+     */
+    public DictionaryItemAdapter(Context ctx, ArrayList<DictionaryItem> objects) {
         super(ctx, 0, objects);
     }
 
+    /**
+     * Manages how the DictionaryItem objects will be interpreted and placed into the ListView.
+     * @param position Position of element
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Definition d = getItem(position);
+        DictionaryItem d = getItem(position);
 
         if(convertView==null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.dictionary_item, parent, false);
@@ -32,6 +43,7 @@ public class DictionaryItemAdapter extends ArrayAdapter<Definition> {
 
         word.setText(d.getWord());
         pronunciation.setText(d.getPronunciation());
+        //Formatting the definitions
         String definitions = "";
         for(int i=0; i<d.getDefinitions().length; i++) {
             definitions += (i+1 + "\t: " + d.getDefinitions()[i] + "\n");
