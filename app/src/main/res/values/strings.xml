@@ -14,5 +14,6 @@
 
     <!--activity_merriam_webster_dictionary.xml-->
     <string name="dummy_title">Hello world</string>
+    <string name="saved_words">Saved Words</string>
 
 </resources>

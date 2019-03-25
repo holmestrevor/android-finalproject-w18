@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Search for a word"
+        android:id="@+id/dictionarySearch"
+        app:actionViewClass="android.widget.SearchView"
+        android:icon="@android:drawable/ic_search_category_default"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:title="Help"
+        android:id="@+id/helpButton"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:orderInCategory="200"
+        app:showAsAction="never"/>
+
+</menu>

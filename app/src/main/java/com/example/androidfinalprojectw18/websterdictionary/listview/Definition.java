@@ -2,8 +2,9 @@ package com.example.androidfinalprojectw18.websterdictionary.listview;
 
 public class Definition {
 
-    String word, pronunciation;
-    String[] definitions;
+    private long id;
+    private String word, pronunciation;
+    private String[] definitions;
 
     public Definition() {
         this("Pasta", "päs-tə", new String[]{ "A dough of flour, eggs and water made in different shapes and dried (as spaghetti or macaroni) or used fresh (as ravioli)", "A dish of cooked pasta"});
@@ -13,6 +14,14 @@ public class Definition {
         setWord(word);
         setPronunciation(pronunciation);
         setDefinitions(definitions);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getWord() {

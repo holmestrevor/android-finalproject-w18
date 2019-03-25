@@ -26,6 +26,18 @@ public class DictionaryItemAdapter extends ArrayAdapter<Definition> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.dictionary_item, parent, false);
         }
 
+        TextView word = (TextView)convertView.findViewById(R.id.word);
+        TextView pronunciation = (TextView)convertView.findViewById(R.id.pronunciation);
+        TextView definition = (TextView)convertView.findViewById(R.id.definition);
+
+        word.setText(d.getWord());
+        pronunciation.setText(d.getPronunciation());
+        String definitions = "";
+        for(int i=0; i<d.getDefinitions().length; i++) {
+            definitions += (i+1 + "\t: " + d.getDefinitions()[i] + "\n");
+        }
+        definition.setText(definitions);
+
         return convertView;
     }
 
