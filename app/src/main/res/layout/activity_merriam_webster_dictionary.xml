@@ -17,48 +17,32 @@
         android:id="@+id/recentlySearched"
         android:text="Recently Searched"
         android:textSize="20sp"
+        android:textColor="#000000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     
-    <RelativeLayout
+    <TextView
+        android:text="You have not searched any definitions recently."
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
-        <TextView
-            android:id="@+id/recentWord"
-            android:text="Dummy word"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"/>
-        <TextView
-            android:id="@+id/recentPronunciation"
-            android:text="(Dummy pronunciation)"
-            android:textColor="#888888"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/recentWord"
-            android:paddingStart="10dp"/>
-        <TextView
-            android:id="@+id/recentDefinitions"
-            android:text="Dummy definitions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/recentWord"/>
-        
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"/>
 
     <TextView
         android:id="@+id/savedWords"
         android:text="@string/saved_words"
         android:textSize="20sp"
+        android:textColor="#000000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <ListView
         android:id="@+id/wordList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_weight="100">
 
     </ListView>
 
@@ -69,6 +53,29 @@
         android:visibility="invisible"
         style="?android:attr/progressBarStyleHorizontal"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <Button
+            android:id="@+id/clearAllItems"
+            android:text="Delete all items"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="clearDictionaryItems"
+            android:layout_weight="50"/>
+
+        <Button
+            android:id="@+id/refresh"
+            android:text="Refresh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:onClick="refreshItems"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>
