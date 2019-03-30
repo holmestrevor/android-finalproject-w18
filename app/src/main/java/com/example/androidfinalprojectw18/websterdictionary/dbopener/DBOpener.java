@@ -1,7 +1,9 @@
 package com.example.androidfinalprojectw18.websterdictionary.dbopener;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -34,6 +36,7 @@ public class DBOpener extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL("CREATE TABLE " + TABLE1_NAME + "("
         + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
         + COL_WORD + " TEXT, "
@@ -41,7 +44,7 @@ public class DBOpener extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE2_NAME + "("
         + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-        + COL_DEFINITION + "TEXT, "
+        + COL_DEFINITION + " TEXT, "
         + COL_ITEM_ID + " INTEGER NOT NULL, "
         + "FOREIGN KEY (" + COL_ITEM_ID + ") REFERENCES " + TABLE1_NAME + "(" + COL_ID + "))");
     }
@@ -51,4 +54,21 @@ public class DBOpener extends SQLiteOpenHelper {
         Log.i("Database upgrade", "Old version: " + oldVersion + "New version: " + newVersion);
 
     }
+
+    public void printCursor(Cursor c) {
+        Log.i("MyOpener", "Database ver: " + VERSION_NUM);
+        String[] columnNames = new String[c.getColumnCount()];
+        for(int i=0; i<c.getColumnCount(); i++) {
+            columnNames[i] = c.getColumnName(i);
+        }
+        Log.i("MyOpener", "Column count = " + c.getColumnCount() + " Column names: " + columnNames[0] + ", " + columnNames[1] + ", " + columnNames[2]);
+        Log.i("MyOpener", "Total returned rows: " + c.getCount());
+        String[] rowResults = new String[c.getCount()];
+//        if(c.moveToFirst()) {
+//            while(c.moveToNext()) {
+//                Log.i("MyOpener", "Row info:\nID: " + c.getLong(c.getColumnIndexOrThrow(COL_ID)) + "\nWord: " + c.getString(c.getColumnIndexOrThrow(COL_WORD)) + "\nPronunciation: " + c.getInt(c.getColumnIndexOrThrow(COL_PRONUNCIATION)));
+//            }
+//        }
+    }
+
 }
