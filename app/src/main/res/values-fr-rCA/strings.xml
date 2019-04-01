@@ -8,7 +8,7 @@
 
     <!--activity_main.xml-->
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-    <string name="webster_dictionary_btn">Webster Dictionary</string>
+    <string name="webster_dictionary_btn">Dictionnaire Webster</string>
     <string name="news_feed_btn">News Feed</string>
     <string name="flight_status_tracker_btn">Flight Status Tracker</string>
     <string name="nyt_article_search_btn">NYT Article Search</string>
@@ -17,6 +17,12 @@
     <string name="dummy_title">Bonjour Monde!</string>
     <string name="saved_words">Mots Sauvegardés</string>
     <string name="help_text">Dictionnaire Webster\nAuteur: Trevor Holmes\nActivity Version: 0.2.0\n\nSur cette page, vous pouvez rechercher des mots dans le dictionnaire Merriam Webster en appuyant sur la loupe.\nVous pouvez également afficher les mots que vous avez enregistrés. appuyez dessus pour obtenir plus de détails.</string>
+    <string name="dictionary_search">Recherchez pour un mot</string>
+    <string name="search_hint">Recherchez</string>
+
+    <!--activity_view_dictionary_item.xml-->
+    <string name="no_words_found">No words found.</string>
+    <string name="suggestions">Here are some suggestions:</string>
 
 
 </resources>

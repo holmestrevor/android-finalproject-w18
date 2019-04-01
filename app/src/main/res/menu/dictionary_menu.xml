@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="Search for a word"
+        android:title="@string/dictionary_search"
         android:id="@+id/dictionarySearch"
         app:actionViewClass="android.widget.SearchView"
         android:icon="@android:drawable/ic_search_category_default"

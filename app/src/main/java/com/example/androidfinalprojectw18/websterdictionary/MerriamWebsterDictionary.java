@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.support.v7.widget.Toolbar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.androidfinalprojectw18.R;
@@ -78,6 +79,24 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.dictionary_menu, menu);
+        MenuItem search = menu.findItem(R.id.dictionarySearch);
+        SearchView searchView = (SearchView)search.getActionView();
+        searchView.setQueryHint(getString(R.string.search_hint));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
+                i.putExtra("searchWord", query);
+                i.putExtra("fromSaved", false);
+                startActivity(i);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
     }
 
