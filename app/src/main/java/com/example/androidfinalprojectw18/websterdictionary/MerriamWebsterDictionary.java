@@ -46,8 +46,6 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merriam_webster_dictionary);
-
-        progressBar = (ProgressBar)findViewById(R.id.dictionaryProgressBar);
         toolbar = (Toolbar)findViewById(R.id.dictionaryToolbar);
         setSupportActionBar(toolbar);
 
@@ -152,6 +150,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
      * @param view
      */
     public void refreshItems(View view) {
+        loadItems();
         adt.notifyDataSetChanged();
         Snackbar.make(view, "Items were refreshed.", Snackbar.LENGTH_SHORT)
                 .setAction("Okay", b -> {
@@ -165,7 +164,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
      */
     public ArrayList<DictionaryItem> loadItems() {
         ArrayList<DictionaryItem> items = new ArrayList<>();
-        String word = "Null", pronunciation = "Null";
+        String word = "", pronunciation = "";
         String[] definitions = new String[1];
         SQLiteOpenHelper dbOpener = new DBOpener(this);
         SQLiteDatabase db = dbOpener.getReadableDatabase();

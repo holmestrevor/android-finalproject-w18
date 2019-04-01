@@ -1,5 +1,6 @@
 package com.example.androidfinalprojectw18.websterdictionary;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.androidfinalprojectw18.R;
@@ -26,7 +28,8 @@ import java.net.URL;
 public class ViewDictionaryItem extends AppCompatActivity {
 
     TextView wordView, pronunciationView, definitionsView;
-    Button saveItem;
+    Button saveButton;
+    ProgressBar progressBar;
     DBOpener dbOpener;
     String search, urlString;
     String word, pronunciation;
@@ -57,21 +60,29 @@ public class ViewDictionaryItem extends AppCompatActivity {
             definitionsView.setText(sb.toString());
         //Otherwise, we are accessing a searched item
         } else {
-            Button saveButton = findViewById(R.id.saveButton);
+            progressBar = findViewById(R.id.dictionaryProgressBar);
+            progressBar.setVisibility(View.VISIBLE);
+            saveButton = findViewById(R.id.saveButton);
             saveButton.setVisibility(View.VISIBLE);
-            search = i.getStringExtra("searchWord").trim();
+            search = i.getStringExtra("searchWord");
             DictionaryQuery query = new DictionaryQuery();
             query.execute("");
+            saveButton.setOnClickListener(b ->{
+                dbOpener = new DBOpener(this);
+                SQLiteDatabase db = dbOpener.getWritableDatabase();
+                ContentValues cv = new ContentValues();
+                cv.put(DBOpener.COL_WORD, word);
+                cv.put(DBOpener.COL_PRONUNCIATION, pronunciation);
+                long id = db.insert(DBOpener.TABLE1_NAME, null, cv);
+                for(int j=0; j<definitions.length; j++) {
+                    cv.put(DBOpener.COL_DEFINITION, definitions[j]);
+                    cv.put(DBOpener.COL_ITEM_ID, id);
+                    id = db.insert(DBOpener.TABLE2_NAME, null, cv);
+                    cv.clear();
+                }
+            });
         }
 
-    }
-
-    /**
-     * Saves the currently viewed item into the database.
-     * @param view
-     */
-    public void saveItem(View view) {
-        DBOpener dbOpener =
     }
 
     private class DictionaryQuery extends AsyncTask<String, Integer, String> {
@@ -79,6 +90,9 @@ public class ViewDictionaryItem extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
+                if(search.contains(" ")) {
+                    search = search.replaceAll(" ", "+");
+                }
                 urlString = "https://www.dictionaryapi.com/api/v1/references/sd3/xml/" + search + "?key=4556541c-b8ed-4674-9620-b6cba447184f";
                 URL url = new URL(urlString);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -98,7 +112,10 @@ public class ViewDictionaryItem extends AppCompatActivity {
                     if(parser.getEventType()!=XmlPullParser.START_TAG) {
                         continue;
                     }
-                    //If this returns true, the word that was entered was not valid
+                    /*
+                    If this returns true, the word that was entered was not found in the dictionary.
+                    Suggestions will be offered.
+                     */
                     if(parser.getName().equals("suggestion")) {
                         if(i>=5){
                             break;
@@ -113,12 +130,23 @@ public class ViewDictionaryItem extends AppCompatActivity {
                             break;
                         }
                         word = parser.getAttributeValue(null, "id");
+                        /*
+                        Some words contain a definition number, like "Pasta[1]". this block removes
+                        that number by finding the index of the open square bracket and creating a
+                        substring.
+                         */
+                        if(word.contains("[")) {
+                            int index = word.indexOf("[");
+                            word = word.substring(0, index);
+                            publishProgress(25);
+                        }
                     }
                     if(parser.getName().equals("pr")) {
                         if(pronunciation!=null) {
                             break;
                         }
                         pronunciation = parser.nextText();
+                        publishProgress(50);
                     }
                     if(parser.getName().equals("dt")) {
                         if(i>=5) {
@@ -126,13 +154,16 @@ public class ViewDictionaryItem extends AppCompatActivity {
                         }
                         String nextText = parser.nextText();
                         if(nextText.equals("") || nextText.equals(":")) {
+                            if(parser.next()==XmlPullParser.START_TAG) {
 
+                            }
                         } else {
                             definitions[i] = nextText;
                         }
                         i++;
                     }
                 }
+                publishProgress(100);
             } catch(ProtocolException e) {
                 e.printStackTrace();
             } catch(IOException e) {
@@ -150,14 +181,18 @@ public class ViewDictionaryItem extends AppCompatActivity {
             pronunciationView.setText(pronunciation);
             StringBuilder definitionsFormatted = new StringBuilder();
             for(int i=0;i<definitions.length; i++) {
+                if(definitions[i]==null) {
+                    break;
+                }
                 definitionsFormatted.append(i+1 + " " + definitions[i] + "\n");
             }
             definitionsView.setText(definitionsFormatted.toString());
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-
+            progressBar.setProgress(values[0]);
         }
 
     }
