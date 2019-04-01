@@ -15,6 +15,9 @@
     <!--activity_merriam_webster_dictionary.xml-->
     <string name="dummy_title">Hello world</string>
     <string name="saved_words">Saved Words</string>
-    <string name="helpText">Dictionnaire Webster\nAuteur: Trevor Holmes\nActivity Version: 0.2.0\n\nSur cette page, vous pouvez rechercher des mots dans le dictionnaire Merriam Webster en appuyant sur la loupe.\nVous pouvez également afficher les mots que vous avez enregistrés. appuyez dessus pour obtenir plus de détails.</string>
+    <string name="help_text">Webster Dictionary\nAuthor: Trevor Holmes\nVersion: 0.2.0\nFrom this page, you can search Merriam Webster for a word, or view words you have saved. You can tap on a word to view it.</string>
+
+    <!--activity_view_dictionary_item.xml-->
+    <string name="no_words_found">No words were found matching this suggestion.</string>
 
 </resources>

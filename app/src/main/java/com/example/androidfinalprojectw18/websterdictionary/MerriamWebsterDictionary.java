@@ -88,7 +88,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
                 break;
             case R.id.helpButton:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(R.string.helpText)
+                builder.setMessage(R.string.help_text)
                         .setPositiveButton("Okay", (dialog, which) -> {
                             //Do nothing
                         }).show();

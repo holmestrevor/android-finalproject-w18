@@ -24,7 +24,7 @@ import java.net.URL;
 
 public class ViewDictionaryItem extends AppCompatActivity {
 
-    TextView word, pronunciation, definitions;
+    TextView wordView, pronunciationView, definitionsView;
     Button saveItem;
     DBOpener dbOpener;
     String search, urlString;
@@ -36,26 +36,26 @@ public class ViewDictionaryItem extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        word = (TextView)findViewById(R.id.wordExpanded);
-        pronunciation = (TextView)findViewById(R.id.pronunciationExpanded);
-        definitions = (TextView)findViewById(R.id.definitionsExpanded);
+        wordView = (TextView)findViewById(R.id.wordExpanded);
+        pronunciationView = (TextView)findViewById(R.id.pronunciationExpanded);
+        definitionsView = (TextView)findViewById(R.id.definitionsExpanded);
 
         //Check if we are looking at a saved word
         if(i.getBooleanExtra("fromSaved", false)) {
-            word.setText(i.getStringExtra("word"));
-            pronunciation.setText(i.getStringExtra("pronunciation"));
+            wordView.setText(i.getStringExtra("word"));
+            pronunciationView.setText(i.getStringExtra("pronunciation"));
 
             String s = "";
             //Formatting the definitions to be placed into the TextView
             for(int j=0; j<i.getIntExtra("definitionCount", 0); j++) {
                 s += j+1 + ": " + i.getStringExtra("definition" + j) + "\n";
             }
-            definitions.setText(s);
+            definitionsView.setText(s);
         //Otherwise, we are accessing a searched item
         } else {
             search = i.getStringExtra("searchWord").trim();
-//            DictionaryQuery query = new DictionaryQuery();
-//            query.execute("");
+            DictionaryQuery query = new DictionaryQuery();
+            query.execute("");
         }
 
     }
@@ -86,7 +86,12 @@ public class ViewDictionaryItem extends AppCompatActivity {
                     if(parser.getEventType()!=XmlPullParser.START_TAG) {
                         continue;
                     }
-                    if(parser.getName().equals("")) {
+                    int i = 0;
+                    if(parser.getName().equals("suggestion")) {
+                        word = getResources().getString(R.string.no_words_found);
+
+                    }
+                    if(parser.getName().equals("entry")) {
                         word = parser.getAttributeValue(null, "hw");
                         pronunciation = parser.getAttributeValue(null, "pr");
                     }
@@ -104,12 +109,17 @@ public class ViewDictionaryItem extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+            wordView.setText(word);
+            pronunciationView.setText(pronunciation);
+            StringBuilder definitionsFormatted = new StringBuilder();
+            for(int i=0;i<definitions.length; i++) {
+                definitionsFormatted.append(definitions[i] + "\n");
+            }
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
+
         }
     }
 

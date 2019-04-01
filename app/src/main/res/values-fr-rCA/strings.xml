@@ -16,7 +16,7 @@
     <!--activity_merriam_webster_dictionary.xml-->
     <string name="dummy_title">Bonjour Monde!</string>
     <string name="saved_words">Mots Sauvegardés</string>
-    <string name="helpText">Webster Dictionary\nAuteur: Trevor Holmes\n</string>
+    <string name="help_text">Dictionnaire Webster\nAuteur: Trevor Holmes\nActivity Version: 0.2.0\n\nSur cette page, vous pouvez rechercher des mots dans le dictionnaire Merriam Webster en appuyant sur la loupe.\nVous pouvez également afficher les mots que vous avez enregistrés. appuyez dessus pour obtenir plus de détails.</string>
 
 
 </resources>
