@@ -22,11 +22,15 @@ import android.support.v7.widget.Toolbar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.androidfinalprojectw18.ArticleSearchNYT;
+import com.example.androidfinalprojectw18.FlightStatusTracker;
+import com.example.androidfinalprojectw18.NewsFeed;
 import com.example.androidfinalprojectw18.R;
 import com.example.androidfinalprojectw18.websterdictionary.dbopener.DBOpener;
 import com.example.androidfinalprojectw18.websterdictionary.listview.DictionaryItem;
 import com.example.androidfinalprojectw18.websterdictionary.listview.DictionaryItemAdapter;
 
+import java.nio.channels.NotYetBoundException;
 import java.util.ArrayList;
 
 public class MerriamWebsterDictionary extends AppCompatActivity {
@@ -100,6 +104,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent i;
         switch(item.getItemId()) {
             case R.id.dictionarySearch:
                 break;
@@ -110,6 +115,17 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
                             //Do nothing
                         }).show();
                 break;
+            case R.id.dictionary_to_flight:
+                i = new Intent(MerriamWebsterDictionary.this, FlightStatusTracker.class);
+                startActivity(i);
+                break;
+            case R.id.dictionary_to_newsfeed:
+                i = new Intent(MerriamWebsterDictionary.this, NewsFeed.class);
+                startActivity(i);
+                break;
+            case R.id.dictionary_to_nyt:
+                i = new Intent(MerriamWebsterDictionary.this, ArticleSearchNYT.class);
+                startActivity(i);
             default:
                 break;
         }
@@ -212,4 +228,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         dbOpener.close();
         return items;
     }
+
+
+
 }

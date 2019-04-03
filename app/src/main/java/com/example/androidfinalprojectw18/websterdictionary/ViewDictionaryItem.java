@@ -27,12 +27,18 @@ import java.net.URL;
 
 public class ViewDictionaryItem extends AppCompatActivity {
 
+    //View Items
     TextView wordView, pronunciationView, definitionsView;
     Button saveButton;
     ProgressBar progressBar;
+
+    //Database opener
     DBOpener dbOpener;
+
+    //Strings for
     String search, urlString;
     String word, pronunciation;
+
     //Array will retrieve a maximum of five definitions
     String[] definitions = new String[5];
 
