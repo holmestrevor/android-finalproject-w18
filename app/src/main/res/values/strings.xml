@@ -11,7 +11,7 @@
     <string name="news_feed_btn">News Feed</string>
     <string name="flight_status_tracker_btn">Flight Status Tracker</string>
     <string name="nyt_article_search_btn">NYT Article Search</string>
-
+    
     <!--activity_merriam_webster_dictionary.xml-->
     <string name="dummy_title">Hello world</string>
     <string name="saved_words">Saved Words</string>
@@ -22,5 +22,11 @@
     <!--activity_view_dictionary_item.xml-->
     <string name="no_words_found">No words found.</string>
     <string name="suggestions">Here are some suggestions:</string>
-
+    
+    <!--FlightTracker-->
+    <string name="flight_tracker_to_nyt_article_search">NYT Article Search</string>
+    <string name="flight_tracker_to_news_feed">News Feed</string>
+    <string name="flight_tracker_to_webster_dictionary">Webster Dictionary</string>
+    <string name="flight_tracker_help">Help</string>
+    <string name="flight_help_text">Created by Adam White\nVersion:1.0.0\nThis collects flight tracking statuses</string>
 </resources>

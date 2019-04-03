@@ -33,5 +33,9 @@
         android:max="100"
         android:indeterminate="false"
         android:progress="0"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/flight_tracker_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
