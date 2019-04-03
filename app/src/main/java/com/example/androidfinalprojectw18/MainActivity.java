@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.androidfinalprojectw18.websterdictionary.MerriamWebsterDictionary;
+
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;

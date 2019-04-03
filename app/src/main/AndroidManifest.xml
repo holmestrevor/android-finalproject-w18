@@ -9,8 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".ArticleDetailActivity" />
         <activity android:name=".ArticleSearchNYT"></activity>
         <activity android:name=".FlightStatusTracker" />
         <activity android:name=".NewsFeed" />
@@ -22,9 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
