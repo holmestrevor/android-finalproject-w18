@@ -4,39 +4,39 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    ProgressBar progressBar;
+    TextView percent_TextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        progressBar = findViewById(R.id.main_progressBar);
+        percent_TextView = findViewById(R.id.percent_textView);
+
+        progressBar.setMax(100);
+        progressBar.setScaleY(3f);
+
+        progressAnimation();
+
     }
 
-    /**
-     * Launches one of the four activities, based on what button was pressed.
-     * @param view - The button being pressed
-     */
-    public void launchActivity(View view) {
-        Button b = (Button)view;
-        Intent i;
-        switch(b.getId()) {
-            case R.id.websterButton:
-                i = new Intent(this, MerriamWebsterDictionary.class);
-                break;
-            case R.id.newsFeedButton:
-                i = new Intent(this, NewsFeed.class);
-                break;
-            case R.id.flightStatusButton:
-                i = new Intent(this, FlightStatusTracker.class);
-                break;
-            case R.id.articleSearchButton:
-                i = new Intent(this, ArticleSearchNYT.class);
-                break;
-            default:
-                i = new Intent(this, MerriamWebsterDictionary.class);
-        }
-        startActivity(i);
+    public void progressAnimation(){
+        ProgressBarAnimation animation = new ProgressBarAnimation(this, progressBar, percent_TextView, 0f, 100f);
+        animation.setDuration(3000);
+        progressBar.setAnimation(animation);
     }
+
 }
