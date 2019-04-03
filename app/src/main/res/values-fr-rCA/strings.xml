@@ -25,8 +25,8 @@
     <string name="suggestions">Suggestions:</string>
 
     <!--FlightTracker-->
-    <string name="flight_tracker_to_nyt_article_search">Recherche d'articles sur le NYT</string>
-    <string name="flight_tracker_to_news_feed">Fil d'actualité</string>
+    <string name="flight_tracker_to_nyt_article_search">Recherche d\'articles sur le NYT</string>
+    <string name="flight_tracker_to_news_feed">Fil d\'actualité</string>
     <string name="flight_tracker_to_webster_dictionary">Dictionnaire Webster</string>
     <string name="flight_tracker_help">Aidez-moi</string>
     <string name="flight_help_text">Créé par Adam White \ nVersion: 1.0.0 \ nCeci collecte les états de suivi des vols.</string>
