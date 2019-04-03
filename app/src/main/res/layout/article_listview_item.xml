@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/articleImage"
+        android:layout_below="@id/description"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Main title"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/articleTitle"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:textSize="25dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_below="@id/articleTitle"
+        android:id="@+id/author"
+        android:text="Author"
+        android:paddingLeft="20dp"
+        android:layout_alignParentLeft="true"
+        android:textSize="20dp"
+        />
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:id="@+id/description"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="20dp"
+        android:layout_below="@id/author"
+        android:text="Descriptine"/>
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/link"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/articleImage"/>
+
+
+</RelativeLayout>

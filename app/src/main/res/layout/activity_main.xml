@@ -1,62 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical"
-    android:weightSum="80">
+    android:padding="16dp">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ac_logo" />
+
+    <TextView
+        android:id="@+id/percent_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 %"
+        android:textColor="#006341"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/main_progressBar"/>
+
+    <ProgressBar
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="40">
+        android:layout_height="wrap_content"
+        android:id="@+id/main_progressBar"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"/>
 
-        <TextView
-            android:text="Hello World!"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"/>
 
-        <TextView
-            android:text="@string/lorem_ipsum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/websterButton"
-        android:text="@string/webster_dictionary_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:onClick="launchActivity"/>
-
-    <Button
-        android:id="@+id/newsFeedButton"
-        android:text="@string/news_feed_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:onClick="launchActivity"/>
-
-    <Button
-        android:id="@+id/flightStatusButton"
-        android:text="@string/flight_status_tracker_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:onClick="launchActivity"/>
-
-    <Button
-        android:id="@+id/articleSearchButton"
-        android:text="@string/nyt_article_search_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:onClick="launchActivity"/>
-
-</LinearLayout>
+</RelativeLayout>
