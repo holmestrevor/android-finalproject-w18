@@ -19,6 +19,10 @@
     <string name="help_text">Dictionnaire Webster\nAuteur: Trevor Holmes\nActivity Version: 0.2.0\n\nSur cette page, vous pouvez rechercher des mots dans le dictionnaire Merriam Webster en appuyant sur la loupe.\nVous pouvez également afficher les mots que vous avez enregistrés. appuyez dessus pour obtenir plus de détails.</string>
     <string name="dictionary_search">Recherchez pour un mot</string>
     <string name="search_hint">Recherchez</string>
+    <string name="delete_dialog">Are you sure you want to delete all items? This process cannot be undone.</string>
+    <string name="delete_success">All items successfully deleted</string>
+    <string name="no">Non</string>
+    <string name="delete_confirm">Oui, je suis sûr</string>
 
     <!--activity_view_dictionary_item.xml-->
     <string name="no_words_found">Mots non trouvés.</string>

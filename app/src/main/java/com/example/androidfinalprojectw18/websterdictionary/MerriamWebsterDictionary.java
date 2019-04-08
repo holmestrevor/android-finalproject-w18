@@ -3,6 +3,7 @@ package com.example.androidfinalprojectw18.websterdictionary;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -35,16 +36,16 @@ import java.util.ArrayList;
 
 public class MerriamWebsterDictionary extends AppCompatActivity {
 
-    //ListView containing dictionary items
-    ListView wordList;
-    //Progress bar
-    ProgressBar progressBar;
+    //ListViews containing dictionary items & recently searched items respectively
+    ListView wordList, recentList;
     //ArrayList containing dictionary objects, to be passed into ListView
     ArrayList<DictionaryItem> words;
     //Toolbar
     Toolbar toolbar;
-    //ArrayAdapter for the ListView.
+    //ArrayAdapter for the words ListView.
     ArrayAdapter adt;
+    //SharedPreferences object to hold the most recently searched word
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,15 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
             i.putExtra("fromSaved", true);
             startActivity(i);
         });
+
+        recentList = findViewById(R.id.recentList);
+        preferences = getSharedPreferences("webster", MODE_PRIVATE);
+
+        recentList.setOnItemClickListener((parent, view, position, id) -> {
+            Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
+            i.putExtra("word", preferences.getString("word", ""));
+        });
+
     }
 
     @Override
@@ -87,6 +97,10 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("word", query);
+
+                editor.apply();
                 Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
                 i.putExtra("searchWord", query);
                 i.putExtra("fromSaved", false);
@@ -138,26 +152,20 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
      */
     public void clearDictionaryItems(View view) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("Are you sure you want to delete all items? This process cannot be undone.")
-                .setPositiveButton("Yes, I'm sure", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        SQLiteOpenHelper dbOpener = new DBOpener(MerriamWebsterDictionary.this);
-                        SQLiteDatabase db = dbOpener.getReadableDatabase();
-                        db.delete(DBOpener.TABLE2_NAME, null, null);
-                        db.delete(DBOpener.TABLE1_NAME, null, null);
-                        adt.clear();
-                        adt.notifyDataSetChanged();
-                        Toast.makeText(view.getContext(), "All items successfully deleted", Toast.LENGTH_SHORT).show();
-                        db.close();
-                        dbOpener.close();
-                    }
+        alertDialog.setMessage(R.string.delete_dialog)
+                .setPositiveButton(R.string.delete_confirm, (dialog, which) -> {
+                    SQLiteOpenHelper dbOpener = new DBOpener(MerriamWebsterDictionary.this);
+                    SQLiteDatabase db = dbOpener.getReadableDatabase();
+                    db.delete(DBOpener.TABLE2_NAME, null, null);
+                    db.delete(DBOpener.TABLE1_NAME, null, null);
+                    adt.clear();
+                    adt.notifyDataSetChanged();
+                    Toast.makeText(view.getContext(), getString(R.string.delete_success), Toast.LENGTH_SHORT).show();
+                    db.close();
+                    dbOpener.close();
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Do nothing
-                    }
+                .setNegativeButton(R.string.no, (dialog, which) -> {
+                    //Do nothing
                 }).show();
     }
 
@@ -180,50 +188,35 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
      */
     public ArrayList<DictionaryItem> loadItems() {
         ArrayList<DictionaryItem> items = new ArrayList<>();
-        String word = "", pronunciation = "";
-        String[] definitions = new String[1];
+        String word, pronunciation;
+        String[] definitions = new String[5];
         SQLiteOpenHelper dbOpener = new DBOpener(this);
         SQLiteDatabase db = dbOpener.getReadableDatabase();
 
         db.delete(DBOpener.TABLE2_NAME, null, null);
         db.delete(DBOpener.TABLE1_NAME, null, null);
 
-        /*
-        This section inserts sample items into the database when it loads.
-         */
-        Cursor c = db.rawQuery("SELECT * FROM " + DBOpener.TABLE1_NAME, null);
-        ((DBOpener) dbOpener).printCursor(c);
-        c = db.rawQuery("SELECT * FROM " + DBOpener.TABLE2_NAME, null);
-        ((DBOpener) dbOpener).printCursor(c);
-
-//        ContentValues cv = new ContentValues();
-//        cv.put(DBOpener.COL_WORD, "Cromulent");
-//        cv.put(DBOpener.COL_PRONUNCIATION, "Exactly as it sounds");
-//
-//        long id = db.insert(DBOpener.TABLE1_NAME, null, cv);
-//
-//        cv.put(DBOpener.COL_DEFINITION, "Agreeable or correct");
-//        cv.put(DBOpener.COL_ITEM_ID, id);
-//
-//        db.insert(DBOpener.TABLE2_NAME, null, cv);
+        Cursor c = db.query(false, DBOpener.TABLE1_NAME, null, null, null, null, null, null, null);
+        Cursor d;
 
         while(c.moveToNext()) {
             word = c.getString(c.getColumnIndex(DBOpener.COL_WORD));
             pronunciation = c.getString(c.getColumnIndex(DBOpener.COL_PRONUNCIATION));
             long id = c.getLong(c.getColumnIndex(DBOpener.COL_ID));
             //For each dictionary item, we call a "Sub-query" to find the descriptions.
-            Cursor d = db.rawQuery("SELECT * FROM " + DBOpener.TABLE2_NAME + " WHERE " + DBOpener.COL_ITEM_ID + " = ?", new String[] { String.valueOf(id) });
+            d = db.rawQuery("SELECT * FROM " + DBOpener.TABLE2_NAME + " WHERE " + DBOpener.COL_ITEM_ID + " = ?", new String[] { String.valueOf(id) });
             int i = 0;
             while(d.moveToNext()) {
                 definitions = new String[d.getColumnCount()];
                 //Insert the definition into the string
                 definitions[i] = d.getString(d.getColumnIndex(DBOpener.COL_DEFINITION));
+                //Increment i
                 i++;
             }
             items.add(new DictionaryItem(word, pronunciation, definitions));
-            d.close();
         }
         c.close();
+        d.close();
         db.close();
         dbOpener.close();
         return items;
