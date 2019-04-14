@@ -20,6 +20,12 @@ public class DBOpener extends SQLiteOpenHelper {
     public static final String COL_DEFINITION = "DEFINITION";
     public static final String COL_ITEM_ID = "ITEM_id";
 
+    public static final String COL_DEFINITION0 = "Definition0";
+    public static final String COL_DEFINITION1 = "Definition1";
+    public static final String COL_DEFINITION2 = "Definition2";
+    public static final String COL_DEFINITION3 = "Definition3";
+    public static final String COL_DEFINITION4 = "Definition4";
+
     public DBOpener(Activity ctx) {
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
@@ -40,13 +46,12 @@ public class DBOpener extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE1_NAME + "("
         + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
         + COL_WORD + " TEXT, "
-        + COL_PRONUNCIATION + " TEXT)");
-
-        db.execSQL("CREATE TABLE " + TABLE2_NAME + "("
-        + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-        + COL_DEFINITION + " TEXT, "
-        + COL_ITEM_ID + " INTEGER NOT NULL, "
-        + "FOREIGN KEY (" + COL_ITEM_ID + ") REFERENCES " + TABLE1_NAME + "(" + COL_ID + "))");
+        + COL_PRONUNCIATION + " TEXT, "
+        + COL_DEFINITION0 + " TEXT, "
+        + COL_DEFINITION1 + " TEXT, "
+        + COL_DEFINITION2 + " TEXT, "
+        + COL_DEFINITION3 + " TEXT, "
+        + COL_DEFINITION4 + " TEXT)");
     }
 
     @Override

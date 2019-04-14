@@ -33,4 +33,5 @@
     <string name="flight_tracker_to_webster_dictionary">Webster Dictionary</string>
     <string name="flight_tracker_help">Help</string>
     <string name="flight_help_text">Created by Adam White\nVersion:1.0.0\nThis collects flight tracking statuses</string>
+    <string name="no_searches">You have not searched any definitions recently.</string>
 </resources>

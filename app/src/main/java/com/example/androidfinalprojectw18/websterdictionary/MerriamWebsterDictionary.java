@@ -53,9 +53,12 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         setContentView(R.layout.activity_merriam_webster_dictionary);
         toolbar = (Toolbar)findViewById(R.id.dictionaryToolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Fetching the ArrayList items from the SQLite database
         words = loadItems();
+
+        words.add(new DictionaryItem("Word", "Pronunciation", new String[]{"Definition\nDefinition"}));
 
         adt = new DictionaryItemAdapter(this, words);
         wordList = findViewById(R.id.wordList);
@@ -174,7 +177,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
      * @param view
      */
     public void refreshItems(View view) {
-        loadItems();
+        words = loadItems();
         adt.notifyDataSetChanged();
         Snackbar.make(view, "Items were refreshed.", Snackbar.LENGTH_SHORT)
                 .setAction("Okay", b -> {
@@ -193,30 +196,22 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         SQLiteOpenHelper dbOpener = new DBOpener(this);
         SQLiteDatabase db = dbOpener.getReadableDatabase();
 
-        db.delete(DBOpener.TABLE2_NAME, null, null);
-        db.delete(DBOpener.TABLE1_NAME, null, null);
-
+        //SELECT * FROM DictionaryItem
         Cursor c = db.query(false, DBOpener.TABLE1_NAME, null, null, null, null, null, null, null);
-        Cursor d;
 
         while(c.moveToNext()) {
             word = c.getString(c.getColumnIndex(DBOpener.COL_WORD));
             pronunciation = c.getString(c.getColumnIndex(DBOpener.COL_PRONUNCIATION));
             long id = c.getLong(c.getColumnIndex(DBOpener.COL_ID));
-            //For each dictionary item, we call a "Sub-query" to find the descriptions.
-            d = db.rawQuery("SELECT * FROM " + DBOpener.TABLE2_NAME + " WHERE " + DBOpener.COL_ITEM_ID + " = ?", new String[] { String.valueOf(id) });
-            int i = 0;
-            while(d.moveToNext()) {
-                definitions = new String[d.getColumnCount()];
-                //Insert the definition into the string
-                definitions[i] = d.getString(d.getColumnIndex(DBOpener.COL_DEFINITION));
-                //Increment i
-                i++;
-            }
+            definitions [0] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION0)));
+            definitions [1] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION1)));
+            definitions [2] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION2)));
+            definitions [3] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION3)));
+            definitions [4] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION4)));
+
             items.add(new DictionaryItem(word, pronunciation, definitions));
+            items.get(items.size()).setId(id);
         }
-        c.close();
-        d.close();
         db.close();
         dbOpener.close();
         return items;

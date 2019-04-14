@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
@@ -61,7 +62,7 @@ public class ViewDictionaryItem extends AppCompatActivity {
             StringBuilder sb = new StringBuilder();
             //Formatting the definitions to be placed into the TextView
             for(int j=0; j<i.getIntExtra("definitionCount", 0); j++) {
-                sb.append(j+1 + ": " + i.getStringExtra("definition" + j) + "\n");
+                sb.append(i.getStringExtra("definition" + j) + "\n");
             }
             definitionsView.setText(sb.toString());
         //Otherwise, we are accessing a searched item
@@ -79,12 +80,20 @@ public class ViewDictionaryItem extends AppCompatActivity {
                 ContentValues cv = new ContentValues();
                 cv.put(DBOpener.COL_WORD, word);
                 cv.put(DBOpener.COL_PRONUNCIATION, pronunciation);
-                long id = db.insert(DBOpener.TABLE1_NAME, null, cv);
-                for(int j=0; j<definitions.length; j++) {
-                    cv.put(DBOpener.COL_DEFINITION, definitions[j]);
-                    cv.put(DBOpener.COL_ITEM_ID, id);
-                    id = db.insert(DBOpener.TABLE2_NAME, null, cv);
-                    cv.clear();
+                if(!definitions[0].isEmpty()) {
+                    cv.put(DBOpener.COL_DEFINITION0, definitions[0]);
+                }
+                if(!definitions[1].isEmpty()) {
+                    cv.put(DBOpener.COL_DEFINITION0, definitions[1]);
+                }
+                if(!definitions[2].isEmpty()) {
+                    cv.put(DBOpener.COL_DEFINITION0, definitions[2]);
+                }
+                if(!definitions[3].isEmpty()) {
+                    cv.put(DBOpener.COL_DEFINITION0, definitions[3]);
+                }
+                if(!definitions[4].isEmpty()) {
+                    cv.put(DBOpener.COL_DEFINITION0, definitions[4]);
                 }
             });
         }
@@ -160,13 +169,11 @@ public class ViewDictionaryItem extends AppCompatActivity {
                         }
                         String nextText = parser.nextText();
                         if(nextText.equals("") || nextText.equals(":")) {
-                            if(parser.next()==XmlPullParser.START_TAG) {
-
-                            }
+                            break;
                         } else {
                             definitions[i] = nextText;
+                            i++;
                         }
-                        i++;
                     }
                 }
                 publishProgress(100);
