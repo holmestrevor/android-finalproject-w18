@@ -61,8 +61,11 @@ public class ViewDictionaryItem extends AppCompatActivity {
 
             StringBuilder sb = new StringBuilder();
             //Formatting the definitions to be placed into the TextView
-            for(int j=0; j<i.getIntExtra("definitionCount", 0); j++) {
-                sb.append(i.getStringExtra("definition" + j) + "\n");
+            for(int j=0; j<i.getStringArrayExtra("definitions").length; j++) {
+                if(i.getStringArrayExtra("definitions")[j]==null) {
+                    break;
+                }
+                sb.append(i.getStringArrayExtra("definitions")[j] + "\n");
             }
             definitionsView.setText(sb.toString());
         //Otherwise, we are accessing a searched item
@@ -80,21 +83,26 @@ public class ViewDictionaryItem extends AppCompatActivity {
                 ContentValues cv = new ContentValues();
                 cv.put(DBOpener.COL_WORD, word);
                 cv.put(DBOpener.COL_PRONUNCIATION, pronunciation);
-                if(!definitions[0].isEmpty()) {
+                if(definitions[0]!=null) {
                     cv.put(DBOpener.COL_DEFINITION0, definitions[0]);
                 }
-                if(!definitions[1].isEmpty()) {
+                if(definitions[1]!=null) {
                     cv.put(DBOpener.COL_DEFINITION0, definitions[1]);
                 }
-                if(!definitions[2].isEmpty()) {
+                if(definitions[2]!=null) {
                     cv.put(DBOpener.COL_DEFINITION0, definitions[2]);
                 }
-                if(!definitions[3].isEmpty()) {
+                if(definitions[3]!=null) {
                     cv.put(DBOpener.COL_DEFINITION0, definitions[3]);
                 }
-                if(!definitions[4].isEmpty()) {
+                if(definitions[4]!=null) {
                     cv.put(DBOpener.COL_DEFINITION0, definitions[4]);
                 }
+                Log.i("ContentValues", cv.toString());
+                long id = db.insert(DBOpener.TABLE1_NAME, null, cv);
+                cv.clear();
+                db.close();
+                dbOpener.close();
             });
         }
 
@@ -174,6 +182,13 @@ public class ViewDictionaryItem extends AppCompatActivity {
                             definitions[i] = nextText;
                             i++;
                         }
+                    }
+                    if(parser.getName().equals("sx")) {
+                        if(i>=5) {
+                            break;
+                        }
+                        definitions[i] = parser.nextText();
+                        i++;
                     }
                 }
                 publishProgress(100);

@@ -52,6 +52,9 @@ public class DictionaryItemAdapter extends ArrayAdapter<DictionaryItem> {
         //Formatting the definitions
         String definitions = "";
         for(int i=0; i<d.getDefinitions().length; i++) {
+            if(d.getDefinitions()[i]==null) {
+                break;
+            }
             definitions += (d.getDefinitions()[i] + "\n");
         }
         definition.setText(definitions);

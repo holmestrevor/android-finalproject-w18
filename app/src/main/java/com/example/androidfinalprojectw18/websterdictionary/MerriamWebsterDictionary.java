@@ -58,8 +58,6 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         //Fetching the ArrayList items from the SQLite database
         words = loadItems();
 
-        words.add(new DictionaryItem("Word", "Pronunciation", new String[]{"Definition\nDefinition"}));
-
         adt = new DictionaryItemAdapter(this, words);
         wordList = findViewById(R.id.wordList);
         if(words!=null) {
@@ -72,10 +70,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
             Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
             i.putExtra("word", words.get(position).getWord());
             i.putExtra("pronunciation", words.get(position).getPronunciation());
-            i.putExtra("definitionCount", words.get(position).getDefinitions().length);
-            for(int j=0; j<words.get(position).getDefinitions().length; j++) {
-                i.putExtra("definition" + (j), words.get(position).getDefinitions()[j]);
-            }
+            i.putExtra("definitions", words.get(position).getDefinitions());
             i.putExtra("fromSaved", true);
             startActivity(i);
         });
@@ -102,7 +97,6 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("word", query);
-
                 editor.apply();
                 Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
                 i.putExtra("searchWord", query);
@@ -159,7 +153,6 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
                 .setPositiveButton(R.string.delete_confirm, (dialog, which) -> {
                     SQLiteOpenHelper dbOpener = new DBOpener(MerriamWebsterDictionary.this);
                     SQLiteDatabase db = dbOpener.getReadableDatabase();
-                    db.delete(DBOpener.TABLE2_NAME, null, null);
                     db.delete(DBOpener.TABLE1_NAME, null, null);
                     adt.clear();
                     adt.notifyDataSetChanged();
@@ -197,20 +190,31 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         SQLiteDatabase db = dbOpener.getReadableDatabase();
 
         //SELECT * FROM DictionaryItem
-        Cursor c = db.query(false, DBOpener.TABLE1_NAME, null, null, null, null, null, null, null);
+        Cursor c = db.query(false, DBOpener.TABLE1_NAME, new String[]{
+                DBOpener.COL_ID,
+                DBOpener.COL_WORD,
+                DBOpener.COL_PRONUNCIATION,
+                DBOpener.COL_DEFINITION0,
+                DBOpener.COL_DEFINITION1,
+                DBOpener.COL_DEFINITION2,
+                DBOpener.COL_DEFINITION3,
+                DBOpener.COL_DEFINITION4
+        }, null, null, null, null, null, null);
+
+        DBOpener.printCursor(c);
 
         while(c.moveToNext()) {
             word = c.getString(c.getColumnIndex(DBOpener.COL_WORD));
             pronunciation = c.getString(c.getColumnIndex(DBOpener.COL_PRONUNCIATION));
             long id = c.getLong(c.getColumnIndex(DBOpener.COL_ID));
-            definitions [0] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION0)));
-            definitions [1] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION1)));
-            definitions [2] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION2)));
-            definitions [3] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION3)));
-            definitions [4] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION4)));
+            definitions[0] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION0)));
+            definitions[1] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION1)));
+            definitions[2] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION2)));
+            definitions[3] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION3)));
+            definitions[4] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION4)));
 
             items.add(new DictionaryItem(word, pronunciation, definitions));
-            items.get(items.size()).setId(id);
+            definitions = new String[5];
         }
         db.close();
         dbOpener.close();

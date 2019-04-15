@@ -60,20 +60,33 @@ public class DBOpener extends SQLiteOpenHelper {
 
     }
 
-    public void printCursor(Cursor c) {
+    public static void printCursor(Cursor c) {
         Log.i("MyOpener", "Database ver: " + VERSION_NUM);
         String[] columnNames = new String[c.getColumnCount()];
         for(int i=0; i<c.getColumnCount(); i++) {
             columnNames[i] = c.getColumnName(i);
+            Log.i("Column " + i, columnNames[i]);
         }
-        Log.i("MyOpener", "Column count = " + c.getColumnCount() + " Column names: " + columnNames[0] + ", " + columnNames[1] + ", " + columnNames[2]);
-        Log.i("MyOpener", "Total returned rows: " + c.getCount());
-        String[] rowResults = new String[c.getCount()];
-//        if(c.moveToFirst()) {
-//            while(c.moveToNext()) {
-//                Log.i("MyOpener", "Row info:\nID: " + c.getLong(c.getColumnIndexOrThrow(COL_ID)) + "\nWord: " + c.getString(c.getColumnIndexOrThrow(COL_WORD)) + "\nPronunciation: " + c.getInt(c.getColumnIndexOrThrow(COL_PRONUNCIATION)));
-//            }
-//        }
+        while(c.moveToNext()) {
+            Log.i("ID", String.valueOf(c.getLong(c.getColumnIndex(COL_ID))));
+            Log.i("Word", c.getString(c.getColumnIndex(COL_WORD)));
+            if(c.getString(c.getColumnIndex(COL_DEFINITION0))!=null) {
+                Log.i("Definition 0", c.getString(c.getColumnIndex(COL_DEFINITION0)));
+            }
+            if(c.getString(c.getColumnIndex(COL_DEFINITION1))!=null) {
+                Log.i("Definition 1", c.getString(c.getColumnIndex(COL_DEFINITION1)));
+            }
+            if(c.getString(c.getColumnIndex(COL_DEFINITION2))!=null) {
+                Log.i("Definition 2", c.getString(c.getColumnIndex(COL_DEFINITION2)));
+            }
+            if(c.getString(c.getColumnIndex(COL_DEFINITION3))!=null) {
+                Log.i("Definition 3", c.getString(c.getColumnIndex(COL_DEFINITION3)));
+            }
+            if(c.getString(c.getColumnIndex(COL_DEFINITION4))!=null) {
+                Log.i("Definition 4", c.getString(c.getColumnIndex(COL_DEFINITION4)));
+            }
+        }
+        c.moveToFirst();
     }
 
 }
