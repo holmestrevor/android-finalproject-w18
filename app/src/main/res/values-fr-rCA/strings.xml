@@ -35,5 +35,6 @@
     <string name="flight_tracker_help">Aidez-moi</string>
     <string name="flight_help_text">Créé par Adam White \ nVersion: 1.0.0 \ nCeci collecte les états de suivi des vols.</string>
     <string name="no_searches">You have not searched any definitions recently.</string>
+    <string name="save_word">Save Word</string>
 
 </resources>

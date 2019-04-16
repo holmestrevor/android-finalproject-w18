@@ -72,6 +72,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
             i.putExtra("pronunciation", words.get(position).getPronunciation());
             i.putExtra("definitions", words.get(position).getDefinitions());
             i.putExtra("fromSaved", true);
+            i.putExtra("id", words.get(position).getId());
             startActivity(i);
         });
 
@@ -81,6 +82,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         recentList.setOnItemClickListener((parent, view, position, id) -> {
             Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
             i.putExtra("word", preferences.getString("word", ""));
+            i.putExtra("fromSaved", false);
         });
 
     }
@@ -171,6 +173,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
      */
     public void refreshItems(View view) {
         words = loadItems();
+        wordList.setAdapter(adt);
         adt.notifyDataSetChanged();
         Snackbar.make(view, "Items were refreshed.", Snackbar.LENGTH_SHORT)
                 .setAction("Okay", b -> {
@@ -214,6 +217,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
             definitions[4] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION4)));
 
             items.add(new DictionaryItem(word, pronunciation, definitions));
+            items.get(items.size()-1).setId(id);
             definitions = new String[5];
         }
         db.close();

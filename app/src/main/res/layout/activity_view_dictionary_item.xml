@@ -32,7 +32,15 @@
 
     <Button
         android:id="@+id/saveButton"
-        android:text="Save Word"
+        android:text="@string/save_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/definitionsExpanded"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:text="@string/delete_word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/definitionsExpanded"

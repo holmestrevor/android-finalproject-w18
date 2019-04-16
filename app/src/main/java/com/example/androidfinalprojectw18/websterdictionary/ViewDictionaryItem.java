@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidfinalprojectw18.R;
 import com.example.androidfinalprojectw18.websterdictionary.dbopener.DBOpener;
@@ -30,7 +31,12 @@ public class ViewDictionaryItem extends AppCompatActivity {
 
     //View Items
     TextView wordView, pronunciationView, definitionsView;
-    Button saveButton;
+    /*
+    Save and delete buttons. These exist in the same place, but only one will
+    show at a time based on whether or not a saved/searched item is being
+    accessed.
+     */
+    Button saveButton, deleteButton;
     ProgressBar progressBar;
 
     //Database opener
@@ -68,6 +74,12 @@ public class ViewDictionaryItem extends AppCompatActivity {
                 sb.append(i.getStringArrayExtra("definitions")[j] + "\n");
             }
             definitionsView.setText(sb.toString());
+            deleteButton = findViewById(R.id.deleteButton);
+            deleteButton.setOnClickListener(b -> {
+                dbOpener = new DBOpener(this);
+                SQLiteDatabase db = dbOpener.getWritableDatabase();
+                db.delete(DBOpener.TABLE1_NAME, DBOpener.COL_ID + " = ?", new String[] {})
+            });
         //Otherwise, we are accessing a searched item
         } else {
             progressBar = findViewById(R.id.dictionaryProgressBar);
@@ -103,6 +115,7 @@ public class ViewDictionaryItem extends AppCompatActivity {
                 cv.clear();
                 db.close();
                 dbOpener.close();
+                Toast.makeText(this, "Item was saved successfully", Toast.LENGTH_SHORT).show();
             });
         }
 
