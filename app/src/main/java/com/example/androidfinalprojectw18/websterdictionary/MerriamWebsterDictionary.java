@@ -33,6 +33,7 @@ import com.example.androidfinalprojectw18.websterdictionary.listview.DictionaryI
 
 import java.nio.channels.NotYetBoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MerriamWebsterDictionary extends AppCompatActivity {
 
@@ -40,6 +41,8 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
     ListView wordList, recentList;
     //ArrayList containing dictionary objects, to be passed into ListView
     ArrayList<DictionaryItem> words;
+    //ArrayList containing one item; the most recently searched word.
+    List<String> recentWord = new ArrayList<String>(1);
     //Toolbar
     Toolbar toolbar;
     //ArrayAdapter for the words ListView.
@@ -173,7 +176,6 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
      */
     public void refreshItems(View view) {
         words = loadItems();
-        wordList.setAdapter(adt);
         adt.notifyDataSetChanged();
         Snackbar.make(view, "Items were refreshed.", Snackbar.LENGTH_SHORT)
                 .setAction("Okay", b -> {
@@ -193,33 +195,27 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         SQLiteDatabase db = dbOpener.getReadableDatabase();
 
         //SELECT * FROM DictionaryItem
-        Cursor c = db.query(false, DBOpener.TABLE1_NAME, new String[]{
-                DBOpener.COL_ID,
-                DBOpener.COL_WORD,
-                DBOpener.COL_PRONUNCIATION,
-                DBOpener.COL_DEFINITION0,
-                DBOpener.COL_DEFINITION1,
-                DBOpener.COL_DEFINITION2,
-                DBOpener.COL_DEFINITION3,
-                DBOpener.COL_DEFINITION4
-        }, null, null, null, null, null, null);
+        Cursor c = db.rawQuery("SELECT * FROM " + DBOpener.TABLE1_NAME, null, null);
 
         DBOpener.printCursor(c);
 
-        while(c.moveToNext()) {
-            word = c.getString(c.getColumnIndex(DBOpener.COL_WORD));
-            pronunciation = c.getString(c.getColumnIndex(DBOpener.COL_PRONUNCIATION));
-            long id = c.getLong(c.getColumnIndex(DBOpener.COL_ID));
-            definitions[0] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION0)));
-            definitions[1] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION1)));
-            definitions[2] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION2)));
-            definitions[3] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION3)));
-            definitions[4] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION4)));
+        if(c.getCount()>0) {
+            do {
+                word = c.getString(c.getColumnIndex(DBOpener.COL_WORD));
+                pronunciation = c.getString(c.getColumnIndex(DBOpener.COL_PRONUNCIATION));
+                long id = c.getLong(c.getColumnIndex(DBOpener.COL_ID));
+                definitions[0] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION0)));
+                definitions[1] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION1)));
+                definitions[2] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION2)));
+                definitions[3] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION3)));
+                definitions[4] = c.getString(c.getColumnIndex((DBOpener.COL_DEFINITION4)));
 
-            items.add(new DictionaryItem(word, pronunciation, definitions));
-            items.get(items.size()-1).setId(id);
-            definitions = new String[5];
+                items.add(new DictionaryItem(word, pronunciation, definitions));
+                items.get(items.size()-1).setId(id);
+                definitions = new String[5];
+            } while(c.moveToNext());
         }
+
         db.close();
         dbOpener.close();
         return items;

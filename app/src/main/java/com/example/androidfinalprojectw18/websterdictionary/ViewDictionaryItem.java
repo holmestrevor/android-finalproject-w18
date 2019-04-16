@@ -2,6 +2,7 @@ package com.example.androidfinalprojectw18.websterdictionary;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.androidfinalprojectw18.R;
 import com.example.androidfinalprojectw18.websterdictionary.dbopener.DBOpener;
 
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -26,6 +28,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.sql.SQLInput;
 
 public class ViewDictionaryItem extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class ViewDictionaryItem extends AppCompatActivity {
 
     //Database opener
     DBOpener dbOpener;
+    SQLiteDatabase db;
 
     //Strings for
     String search, urlString;
@@ -62,6 +66,22 @@ public class ViewDictionaryItem extends AppCompatActivity {
 
         //Check if we are looking at a saved word
         if(i.getBooleanExtra("fromSaved", false)) {
+
+            dbOpener = new DBOpener(this);
+            db = dbOpener.getReadableDatabase();
+            Cursor c = db.query(true,
+                    DBOpener.TABLE1_NAME,
+                    null,
+                    "Where " + DBOpener.COL_ID + " = ?",
+                    new String[] { String.valueOf(i.getLongExtra("id", 0)) },
+                    null,
+                    null,
+                    null,
+                    null
+                    );
+
+
+
             wordView.setText(i.getStringExtra("word"));
             pronunciationView.setText(i.getStringExtra("pronunciation"));
 
@@ -75,10 +95,13 @@ public class ViewDictionaryItem extends AppCompatActivity {
             }
             definitionsView.setText(sb.toString());
             deleteButton = findViewById(R.id.deleteButton);
+            deleteButton.setVisibility(View.VISIBLE);
             deleteButton.setOnClickListener(b -> {
                 dbOpener = new DBOpener(this);
-                SQLiteDatabase db = dbOpener.getWritableDatabase();
-                db.delete(DBOpener.TABLE1_NAME, DBOpener.COL_ID + " = ?", new String[] {})
+                db = dbOpener.getWritableDatabase();
+                db.delete(DBOpener.TABLE1_NAME, DBOpener.COL_ID + " = ?", new String[]{String.valueOf(i.getLongExtra("id", 0))} );
+                Toast.makeText(this, "Item successfully deleted.", Toast.LENGTH_SHORT).show();
+                finish();
             });
         //Otherwise, we are accessing a searched item
         } else {
@@ -99,26 +122,59 @@ public class ViewDictionaryItem extends AppCompatActivity {
                     cv.put(DBOpener.COL_DEFINITION0, definitions[0]);
                 }
                 if(definitions[1]!=null) {
-                    cv.put(DBOpener.COL_DEFINITION0, definitions[1]);
+                    cv.put(DBOpener.COL_DEFINITION1, definitions[1]);
                 }
                 if(definitions[2]!=null) {
-                    cv.put(DBOpener.COL_DEFINITION0, definitions[2]);
+                    cv.put(DBOpener.COL_DEFINITION2, definitions[2]);
                 }
                 if(definitions[3]!=null) {
-                    cv.put(DBOpener.COL_DEFINITION0, definitions[3]);
+                    cv.put(DBOpener.COL_DEFINITION3, definitions[3]);
                 }
                 if(definitions[4]!=null) {
-                    cv.put(DBOpener.COL_DEFINITION0, definitions[4]);
+                    cv.put(DBOpener.COL_DEFINITION4, definitions[4]);
                 }
                 Log.i("ContentValues", cv.toString());
-                long id = db.insert(DBOpener.TABLE1_NAME, null, cv);
+                //The word is a duplicate, do not add to the database
+                if(checkForDuplicates(word, db)) {
+                    Toast.makeText(this, "You have already saved that word.", Toast.LENGTH_SHORT).show();
+                //The word will be saved to the database
+                } else {
+                    long id = db.insert(DBOpener.TABLE1_NAME, null, cv);
+                    Toast.makeText(this, "Item was saved successfully", Toast.LENGTH_SHORT).show();
+                }
                 cv.clear();
                 db.close();
                 dbOpener.close();
-                Toast.makeText(this, "Item was saved successfully", Toast.LENGTH_SHORT).show();
             });
         }
 
+    }
+
+    /**
+     * A method to check if the word that the user is attempting to save already exists in the database.
+     * @param word The word that needs to be compared with database entries
+     * @param db the SQLiteDatabase Object
+     * @return
+     */
+    public boolean checkForDuplicates(String word, SQLiteDatabase db) {
+        Cursor c = db.query(false,
+                DBOpener.TABLE1_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        if(c.getCount()>0) {
+            while(c.moveToNext()) {
+                if(c.getString(c.getColumnIndex(DBOpener.COL_WORD)).equals(word)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private class DictionaryQuery extends AsyncTask<String, Integer, String> {
@@ -139,6 +195,7 @@ public class ViewDictionaryItem extends AppCompatActivity {
 
                 conn.connect();
                 InputStream in = conn.getInputStream();
+
                 XmlPullParser parser = Xml.newPullParser();
                 parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
                 parser.setInput(in, null);
@@ -185,21 +242,6 @@ public class ViewDictionaryItem extends AppCompatActivity {
                         publishProgress(50);
                     }
                     if(parser.getName().equals("dt")) {
-                        if(i>=5) {
-                            break;
-                        }
-                        String nextText = parser.nextText();
-                        if(nextText.equals("") || nextText.equals(":")) {
-                            break;
-                        } else {
-                            definitions[i] = nextText;
-                            i++;
-                        }
-                    }
-                    if(parser.getName().equals("sx")) {
-                        if(i>=5) {
-                            break;
-                        }
                         definitions[i] = parser.nextText();
                         i++;
                     }

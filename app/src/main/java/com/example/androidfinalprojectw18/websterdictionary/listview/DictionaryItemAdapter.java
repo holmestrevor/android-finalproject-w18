@@ -42,9 +42,9 @@ public class DictionaryItemAdapter extends ArrayAdapter<DictionaryItem> {
         TextView definition = (TextView)convertView.findViewById(R.id.definition);
 
         if(position%2==0) {
-            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.colorMedGray));
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.colorMedGray, null));
         } else {
-            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.colorDarkGray));
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.colorDarkGray, null));
         }
 
         word.setText(d.getWord());

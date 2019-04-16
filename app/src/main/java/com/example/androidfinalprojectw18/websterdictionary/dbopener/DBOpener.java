@@ -63,6 +63,7 @@ public class DBOpener extends SQLiteOpenHelper {
     public static void printCursor(Cursor c) {
         Log.i("MyOpener", "Database ver: " + VERSION_NUM);
         String[] columnNames = new String[c.getColumnCount()];
+        Log.i("Result count", String.valueOf(c.getCount()));
         for(int i=0; i<c.getColumnCount(); i++) {
             columnNames[i] = c.getColumnName(i);
             Log.i("Column " + i, columnNames[i]);
