@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.androidfinalprojectw18.websterdictionary.MerriamWebsterDictionary;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,20 +23,20 @@ public class MainActivity extends AppCompatActivity {
         Button b = (Button)view;
         Intent i;
         switch(b.getId()) {
-            case R.id.websterButton:
-                i = new Intent(this, MerriamWebsterDictionary.class);
-                break;
+//            case R.id.websterButton:
+////                i = new Intent(this, MerriamWebsterDictionary.class);
+//                break;
             case R.id.newsFeedButton:
                 i = new Intent(this, com.example.androidfinalprojectw18.newfeeds.MainActivity.class);
                 break;
-            case R.id.flightStatusButton:
-                i = new Intent(this, FlightStatusTracker.class);
-                break;
+//            case R.id.flightStatusButton:
+//                i = new Intent(this, FlightStatusTracker.class);
+//                break;
             case R.id.articleSearchButton:
-                i = new Intent(this, ArticleSearchNYT.class);
+                i = new Intent(this, com.example.androidfinalprojectw18.newyorktimes.MainActivity.class);
                 break;
             default:
-                i = new Intent(this, MerriamWebsterDictionary.class);
+                i = new Intent(this, com.example.androidfinalprojectw18.newyorktimes.MainActivity.class);
         }
         startActivity(i);
     }

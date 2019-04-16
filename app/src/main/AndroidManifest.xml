@@ -12,11 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".websterdictionary.ViewDictionaryItem"></activity>
-        <activity android:name=".ArticleSearchNYT" />
-        <activity android:name=".FlightStatusTracker" />
-        <activity android:name=".NewsFeed" />
-        <activity android:name=".websterdictionary.MerriamWebsterDictionary" />
+        <!--<activity android:name=".websterdictionary.ViewDictionaryItem"></activity>-->
+        <!--<activity android:name=".FlightStatusTracker" />-->
+        <!--<activity android:name=".websterdictionary.MerriamWebsterDictionary" />-->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +26,9 @@
         <activity android:name=".newfeeds.MainActivity"/>
         <activity android:name=".newfeeds.EmptyActivity"/>
         <activity android:name=".newfeeds.Favorite"/>
+
+        <activity android:name=".newyorktimes.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
     </application>
 

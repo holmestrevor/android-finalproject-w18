@@ -8,7 +8,7 @@
         app:actionViewClass="android.widget.SearchView"
         android:icon="@android:drawable/ic_search_category_default"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:title="Help"
@@ -16,5 +16,25 @@
         android:icon="@android:drawable/ic_dialog_info"
         android:orderInCategory="200"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/dictionary_to_flight"
+        android:icon="@drawable/flight_tracker_to_dictionary"
+        android:title="@string/flight_tracker_to_webster_dictionary"
+        android:orderInCategory="2"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/dictionary_to_newsfeed"
+        android:icon="@drawable/flight_tracker_to_newsfeed"
+        android:title="@string/flight_tracker_to_news_feed"
+        android:orderInCategory="3"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/dictionary_to_nyt"
+        android:icon="@drawable/flight_tracker_to_nyt"
+        android:title="@string/flight_tracker_to_nyt_article_search"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
 
 </menu>

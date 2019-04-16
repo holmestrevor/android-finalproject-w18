@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/bookmark"
+        android:icon="@drawable/ic_ny_bookmark"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        app:actionLayout="@layout/newyork_custom_action_item_layout"/>
+    <item android:id="@+id/help"
+        android:icon="@drawable/ic_ny_help"
+        android:orderInCategory="2"
+        app:showAsAction="always"/>
+
+</menu>
