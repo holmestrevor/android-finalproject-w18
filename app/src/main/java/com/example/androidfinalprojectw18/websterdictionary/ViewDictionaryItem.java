@@ -82,8 +82,8 @@ public class ViewDictionaryItem extends AppCompatActivity {
 
 
 
-            wordView.setText(i.getStringExtra("word"));
-            pronunciationView.setText(i.getStringExtra("pronunciation"));
+            wordView.setText(c.getString(c.getColumnIndex(DBOpener.COL_WORD)));
+            pronunciationView.setText(c.getString(c.getColumnIndex(DBOpener.COL_PRONUNCIATION)));
 
             StringBuilder sb = new StringBuilder();
             //Formatting the definitions to be placed into the TextView
@@ -99,7 +99,7 @@ public class ViewDictionaryItem extends AppCompatActivity {
             deleteButton.setOnClickListener(b -> {
                 dbOpener = new DBOpener(this);
                 db = dbOpener.getWritableDatabase();
-                db.delete(DBOpener.TABLE1_NAME, DBOpener.COL_ID + " = ?", new String[]{String.valueOf(i.getLongExtra("id", 0))} );
+                db.delete(DBOpener.TABLE1_NAME, DBOpener.COL_ID + " = ?", new String[]{String.valueOf(c.getLong(c.getColumnIndex(DBOpener.COL_ID)))} );
                 Toast.makeText(this, "Item successfully deleted.", Toast.LENGTH_SHORT).show();
                 finish();
             });

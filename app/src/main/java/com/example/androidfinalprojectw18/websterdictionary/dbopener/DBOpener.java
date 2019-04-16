@@ -16,9 +16,6 @@ public class DBOpener extends SQLiteOpenHelper {
     public static final String COL_ID = "_id";
     public static final String COL_WORD = "WORD";
     public static final String COL_PRONUNCIATION = "PRONUNCIATION";
-    public static final String TABLE2_NAME = "Definition";
-    public static final String COL_DEFINITION = "DEFINITION";
-    public static final String COL_ITEM_ID = "ITEM_id";
 
     public static final String COL_DEFINITION0 = "Definition0";
     public static final String COL_DEFINITION1 = "Definition1";
@@ -60,6 +57,10 @@ public class DBOpener extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * A debug method that prints useful information about the results of a query.
+     * @param c Cursor Object that contains SQLiteDatabase.query() results.
+     */
     public static void printCursor(Cursor c) {
         Log.i("MyOpener", "Database ver: " + VERSION_NUM);
         String[] columnNames = new String[c.getColumnCount()];
