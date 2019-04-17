@@ -315,8 +315,12 @@ public class WebsterFragment extends Fragment {
                         String s = "";
                         if(parser.next()==XmlPullParser.TEXT) {
                             s = parser.getText();
+                            //Continue until the parser reaches the next start tag
                             do {
                                 parser.next();
+                                if(parser.getEventType()==XmlPullParser.END_TAG && parser.getName().equals("def")) {
+                                    break;
+                                }
                             } while(parser.getEventType()!=XmlPullParser.START_TAG);
                         }
                         if(s==null) {
