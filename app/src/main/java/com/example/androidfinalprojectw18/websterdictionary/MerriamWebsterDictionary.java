@@ -1,32 +1,29 @@
 package com.example.androidfinalprojectw18.websterdictionary;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.support.v7.widget.Toolbar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidfinalprojectw18.ArticleSearchNYT;
 import com.example.androidfinalprojectw18.FlightStatusTracker;
-import com.example.androidfinalprojectw18.MainActivity;
-import com.example.androidfinalprojectw18.newfeeds.Favorite;
+import com.example.androidfinalprojectw18.NewsFeed;
 import com.example.androidfinalprojectw18.R;
 import com.example.androidfinalprojectw18.websterdictionary.dbopener.DBOpener;
 import com.example.androidfinalprojectw18.websterdictionary.listview.DictionaryItem;
@@ -199,7 +196,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
                 startActivity(i);
                 break;
             case R.id.dictionary_to_newsfeed:
-                i = new Intent(MerriamWebsterDictionary.this, Favorite.class);
+                i = new Intent(MerriamWebsterDictionary.this, NewsFeed.class);
                 startActivity(i);
                 break;
             case R.id.dictionary_to_nyt:
