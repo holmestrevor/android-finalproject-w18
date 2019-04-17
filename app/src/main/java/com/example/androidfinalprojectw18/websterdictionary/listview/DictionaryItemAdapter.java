@@ -41,12 +41,21 @@ public class DictionaryItemAdapter extends ArrayAdapter<DictionaryItem> {
         TextView pronunciation = (TextView)convertView.findViewById(R.id.pronunciation);
         TextView definition = (TextView)convertView.findViewById(R.id.definition);
 
+        if(position%2==0) {
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.colorMedGray, null));
+        } else {
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.colorDarkGray, null));
+        }
+
         word.setText(d.getWord());
         pronunciation.setText(d.getPronunciation());
         //Formatting the definitions
         String definitions = "";
         for(int i=0; i<d.getDefinitions().length; i++) {
-            definitions += (i+1 + "\t: " + d.getDefinitions()[i] + "\n");
+            if(d.getDefinitions()[i]==null) {
+                break;
+            }
+            definitions += (d.getDefinitions()[i] + "\n");
         }
         definition.setText(definitions);
 

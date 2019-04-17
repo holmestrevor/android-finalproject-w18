@@ -3,5 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorDarkGray">#202025</color>
+    <color name="colorMedGray">#25252a</color>
+    <color name="colorLightGray">#BBBBBB</color>
     <color name="toolbar_color_control_normal">#ffffff</color>
+
 </resources>
