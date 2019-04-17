@@ -33,25 +33,27 @@ import java.sql.SQLInput;
 public class ViewDictionaryItem extends AppCompatActivity {
 
     //View Items
-    TextView wordView, pronunciationView, definitionsView;
+    private TextView wordView, pronunciationView, definitionsView;
     /*
     Save and delete buttons. These exist in the same place, but only one will
     show at a time based on whether or not a saved/searched item is being
     accessed.
      */
-    Button saveButton, deleteButton;
-    ProgressBar progressBar;
+    private Button saveButton, deleteButton;
+    private ProgressBar progressBar;
 
     //Database opener
-    DBOpener dbOpener;
-    SQLiteDatabase db;
+    private DBOpener dbOpener;
+    private SQLiteDatabase db;
 
-    //Strings for
-    String search, urlString;
-    String word, pronunciation;
+    private String search, urlString;
+    private String word, pronunciation;
+
+    //Global boolean to
+    private boolean resultsFound = true;
 
     //Array will retrieve a maximum of five definitions
-    String[] definitions = new String[5];
+    private String[] definitions = new String[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class ViewDictionaryItem extends AppCompatActivity {
             Cursor c = db.query(true,
                     DBOpener.TABLE1_NAME,
                     null,
-                    "Where " + DBOpener.COL_ID + " = ?",
+                    DBOpener.COL_ID + " = ?",
                     new String[] { String.valueOf(i.getLongExtra("id", 0)) },
                     null,
                     null,
@@ -80,20 +82,21 @@ public class ViewDictionaryItem extends AppCompatActivity {
                     null
                     );
 
+            while(c.moveToNext()) {
+                wordView.setText(c.getString(c.getColumnIndex(DBOpener.COL_WORD)));
+                pronunciationView.setText(c.getString(c.getColumnIndex(DBOpener.COL_PRONUNCIATION)));
 
+                StringBuilder sb = new StringBuilder();
 
-            wordView.setText(c.getString(c.getColumnIndex(DBOpener.COL_WORD)));
-            pronunciationView.setText(c.getString(c.getColumnIndex(DBOpener.COL_PRONUNCIATION)));
+                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION0)) + "\n");
+                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION1)) + "\n");
+                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION2)) + "\n");
+                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION3)) + "\n");
+                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION4)) + "\n");
+                definitionsView.setText(sb.toString());
 
-            StringBuilder sb = new StringBuilder();
-            //Formatting the definitions to be placed into the TextView
-            for(int j=0; j<i.getStringArrayExtra("definitions").length; j++) {
-                if(i.getStringArrayExtra("definitions")[j]==null) {
-                    break;
-                }
-                sb.append(i.getStringArrayExtra("definitions")[j] + "\n");
             }
-            definitionsView.setText(sb.toString());
+
             deleteButton = findViewById(R.id.deleteButton);
             deleteButton.setVisibility(View.VISIBLE);
             deleteButton.setOnClickListener(b -> {
@@ -210,6 +213,7 @@ public class ViewDictionaryItem extends AppCompatActivity {
                     Suggestions will be offered.
                      */
                     if(parser.getName().equals("suggestion")) {
+                        resultsFound = false;
                         if(i>=5){
                             break;
                         }
@@ -247,6 +251,25 @@ public class ViewDictionaryItem extends AppCompatActivity {
                         }
                         parser.next();
                         Log.i("parser", parser.getText());
+                        definitions[i] = parser.getText();
+                        if(definitions[i].trim().equals(":")) {
+                            do {
+                                parser.next();
+                                if(parser.getEventType()==XmlPullParser.START_TAG && parser.getName().equals("sx")) {
+                                    if(i>=5) {
+                                        break;
+                                    }
+                                    parser.next();
+                                    definitions[i] = parser.getText();
+                                    if(!definitions[i].startsWith(":")) {
+                                        definitions[i] = ":" + definitions[i];
+                                    }
+                                    i++;
+                                }
+                            } while(parser.getEventType()!=XmlPullParser.START_TAG);
+                        } else {
+                            i++;
+                        }
                     }
                 }
                 publishProgress(100);
@@ -263,6 +286,9 @@ public class ViewDictionaryItem extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            if(!resultsFound) {
+                saveButton.setVisibility(View.INVISIBLE);
+            }
             wordView.setText(word);
             pronunciationView.setText(pronunciation);
             StringBuilder definitionsFormatted = new StringBuilder();

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ import com.example.androidfinalprojectw18.websterdictionary.listview.DictionaryI
 
 import java.nio.channels.NotYetBoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MerriamWebsterDictionary extends AppCompatActivity {
@@ -51,9 +53,40 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
     SharedPreferences preferences;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode==15) {
+            if(resultCode==RESULT_OK) {
+                long id = data.getLongExtra(DBOpener.COL_ID, 0);
+                deleteMessage(id);
+            }
+        }
+    }
+
+    /**
+     * Deletes a message in the ListView.
+     * @param id Database ID of the element
+     */
+    public void deleteMessage(long id) {
+        Iterator<DictionaryItem> iter = words.iterator();
+        while (iter.hasNext()) {
+            DictionaryItem d = iter.next();
+            if(d.getId()==id) {
+                iter.remove();
+            }
+        }
+        adt.notifyDataSetChanged();
+        SQLiteOpenHelper dbOpener = new DBOpener(this);
+        SQLiteDatabase db = dbOpener.getWritableDatabase();
+        db.delete(DBOpener.TABLE1_NAME, DBOpener.COL_ID + " = ?", new String[]{String.valueOf(id)});
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merriam_webster_dictionary);
+
+        boolean isTablet = findViewById(R.id.fragmentPosition) != null;
+
         toolbar = (Toolbar)findViewById(R.id.dictionaryToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -70,13 +103,26 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         will be passed to the next activity as intent items.
         */
         wordList.setOnItemClickListener((parent, view, position, id) -> {
-            Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
-            i.putExtra("word", words.get(position).getWord());
-            i.putExtra("pronunciation", words.get(position).getPronunciation());
-            i.putExtra("definitions", words.get(position).getDefinitions());
-            i.putExtra("fromSaved", true);
-            i.putExtra("id", words.get(position).getId());
-            startActivity(i);
+
+            Bundle dataToPass = new Bundle();
+            long itemId = ((DictionaryItem)wordList.getItemAtPosition(position)).getId();
+            dataToPass.putLong(DBOpener.COL_ID, itemId);
+            dataToPass.putBoolean("fromSaved", true);
+
+            if(isTablet) {
+                WebsterFragment fragment = new WebsterFragment();
+                fragment.setArguments(dataToPass);
+                fragment.setTablet(true);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragmentPosition, fragment)
+                        .addToBackStack("AnyName")
+                        .commit();
+            } else {
+                Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
+                i.putExtras(dataToPass);
+                startActivityForResult(i, 15);
+            }
         });
 
         recentList = findViewById(R.id.recentList);
@@ -84,6 +130,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
 
         recentList.setOnItemClickListener((parent, view, position, id) -> {
             Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
+            Bundle dataToPass = new Bundle();
             i.putExtra("word", preferences.getString("word", ""));
             i.putExtra("fromSaved", false);
         });
@@ -104,8 +151,10 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
                 editor.putString("word", query);
                 editor.apply();
                 Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
-                i.putExtra("searchWord", query);
-                i.putExtra("fromSaved", false);
+                Bundle dataToPass = new Bundle();
+                dataToPass.putString("searchWord", query);
+                dataToPass.putBoolean("fromSaved", false);
+                i.putExtras(dataToPass);
                 startActivity(i);
                 return true;
             }

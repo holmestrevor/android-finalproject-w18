@@ -36,4 +36,7 @@
     <string name="no_searches">You have not searched any definitions recently.</string>
     <string name="save_word">Save Word</string>
     <string name="delete_word">Delete Word</string>
+    <string name="refresh">Refresh</string>
+    <string name="delete_all_items">Delete all items</string>
+    <string name="recently_searched">Recently Searched</string>
 </resources>
