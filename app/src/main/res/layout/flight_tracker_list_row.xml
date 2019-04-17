@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/flight_tracker_icon"
+        android:layout_alignParentStart="true"
+        android:id="@+id/flight_tracker_listview_row_icon"
+        android:padding="10dp"/>
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/flight_number_title"
+        android:layout_toRightOf="@id/flight_tracker_listview_row_icon"
+        android:text="@string/flight_number"
+        android:padding="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/flight_number"
+        android:layout_toRightOf="@id/flight_number_title"
+        android:padding="10dp"/>
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/flight_arrival_title"
+        android:layout_toLeftOf="@id/flight_arrival"
+        android:text="@string/flight_arrival"
+        android:padding="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/flight_arrival"
+        android:layout_alignParentEnd="true"
+        android:padding="10dp"/>
+</RelativeLayout>

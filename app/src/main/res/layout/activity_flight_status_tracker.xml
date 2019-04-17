@@ -20,10 +20,12 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/flight_tracker_edit_text_hint"
         android:id="@+id/fight_tracker_edittext"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/flight_button_text"
         android:id="@+id/fight_tracker_button"/>
     <ProgressBar
         android:layout_width="match_parent"
