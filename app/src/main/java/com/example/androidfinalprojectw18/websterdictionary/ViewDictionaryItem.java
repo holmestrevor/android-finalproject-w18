@@ -242,8 +242,11 @@ public class ViewDictionaryItem extends AppCompatActivity {
                         publishProgress(50);
                     }
                     if(parser.getName().equals("dt")) {
-                        definitions[i] = parser.nextText();
-                        i++;
+                        if(i>=5) {
+                            break;
+                        }
+                        parser.next();
+                        Log.i("parser", parser.getText());
                     }
                 }
                 publishProgress(100);

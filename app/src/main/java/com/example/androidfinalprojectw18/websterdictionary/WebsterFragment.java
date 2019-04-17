@@ -18,6 +18,10 @@ public class WebsterFragment extends Fragment {
     private Bundle dataFromActivity;
     private long id;
 
+    public void setTablet(boolean tablet) {
+        isTablet = tablet;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,5 +30,6 @@ public class WebsterFragment extends Fragment {
 
 
 
+        return null;
     }
 }
