@@ -23,7 +23,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidfinalprojectw18.ArticleSearchNYT;
+import com.example.androidfinalprojectw18.FlightStatusTracker;
 import com.example.androidfinalprojectw18.R;
+import com.example.androidfinalprojectw18.websterdictionary.MerriamWebsterDictionary;
 
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
@@ -171,7 +174,31 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.newsfeed_menu_help:
                 //Show the toast immediately:
-                Toast.makeText(this, "Clicked on help button", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Author’s name Toan Dinh" +
+                        " Activity version number: 1.0" +
+                        " How to use my application: You type name of article " +
+                        " that you want to search then click Search button. " +
+                        " A list of articles will appear " +
+                        " Click on the artcile which you want to read. you will see its detial." +
+                        " you can choose 'ADD TO FAVORITE' or 'VISIT WEBSITE' " +
+                        " ADD TO FAVORITE: save the article in your favorite window)  " +
+                        " VISIT WEBSITE: go to the website which contains the article" , Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.ArticleSearchNYT:
+                 Intent article = new Intent(this, ArticleSearchNYT.class );
+                 startActivityForResult(article, 39);
+
+                 break;
+
+            case R.id.FlightStatusTracker:
+                Intent flight = new Intent(this, FlightStatusTracker.class);
+                startActivityForResult(flight, 40);
+                break;
+
+            case R.id.WebDictionary:
+                Intent web = new Intent(this, MerriamWebsterDictionary.class);
+                startActivityForResult(web,41);
                 break;
 
                 //Snackbar code:
@@ -215,6 +242,11 @@ public class MainActivity extends AppCompatActivity {
             return newView;
         }
 
+        /**
+         *
+         * @param position
+         * @return
+         */
         public long getItemId(int position)
         {
             return (long)position;
@@ -302,10 +334,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        /**
+         *
+         * @param values
+         */
         @Override
         protected void onProgressUpdate(Integer... values) {
         }
 
+        /**
+         *
+         * @param s
+         */
         @Override
         protected void onPostExecute(String s) {
             //the parameter String s will be "Finished task" from line 27

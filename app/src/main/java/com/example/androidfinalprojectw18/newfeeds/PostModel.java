@@ -5,6 +5,15 @@ public class PostModel {
     private String title, website, author, url, text;
     private Long id;
 
+    /**
+     *
+     * @param id
+     * @param title
+     * @param website
+     * @param author
+     * @param url
+     * @param text
+     */
     public PostModel(Long id, String title, String website, String author, String url, String text) {
         this.id = id;
         this.title = title;

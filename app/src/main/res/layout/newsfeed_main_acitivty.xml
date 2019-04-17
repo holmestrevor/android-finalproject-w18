@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchEdit"
-        android:hint="Enter to search"
+        android:hint="@string/Entertosearch"
         android:layout_below="@id/progressBar"
         android:layout_toLeftOf="@id/nf_main_searchBtn"
         />
@@ -36,11 +36,13 @@
         android:id="@+id/nf_main_searchBtn"
         android:layout_alignParentRight="true"
         android:layout_below="@id/progressBar"
-        android:text="Search"/>
+        android:text="@string/Search"
+        android:background="@drawable/buttondesign"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last search"
+        android:text="@string/Lastsearch"
         android:textSize="20dp"
         android:layout_below="@id/searchEdit"
         android:id="@+id/lastSearchTitle"/>
@@ -48,13 +50,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lastSearchWord"
-        android:text="last search"
+        android:text="@string/lastsearch"
         android:layout_below="@+id/lastSearchTitle"
         android:layout_alignParentLeft="true"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search Results"
+        android:text="@string/SearchResults"
         android:textSize="20dp"
         android:layout_below="@id/lastSearchWord"
         android:id="@+id/searchResultsTitle"/>

@@ -45,6 +45,10 @@ public class Favorite extends AppCompatActivity {
     PostAdapter adapter;
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +111,12 @@ public class Favorite extends AppCompatActivity {
         });
     }
 
-
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //If you're coming back from the view contact activity
@@ -164,6 +173,7 @@ public class Favorite extends AppCompatActivity {
      * BaseAdapter from the Lab5, by Professor @etorunski
      * https://github.com/etorunski/InClassExamples_W19/tree/week5
      */
+
     protected class PostAdapter extends BaseAdapter
     {
         @Override

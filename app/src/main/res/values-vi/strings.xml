@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--activity_main.xml-->
+    <string name="webster_dictionary_btn">Tu Dien</string>
+    <string name="news_feed_btn">Trang moi</string>
+    <string name="flight_status_tracker_btn">Theo doi trinh trang chuyen bay</string>
+    <string name="nyt_article_search_btn">Tim kiem van ban NYT</string>
+
+    <!--Newfeeds-->
+    <string name="Entertosearch">Nhap de tim kiem</string>
+    <string name="Search">Tim kiem</string>
+    <string name="SearchResults">Ket qua tim kiem</string>
+    <string name="Lastsearch">Lan cuoi tim kiem</string>
+    <string name="lastsearch">Cuoi Cung</string>
+    <string name="titleexample">Day la mau van ban</string>
+    <string name="websitename">Ten trang web</string>
+    <string name="authorname">Ten tac gia</string>
+    <string name="backBnt">Quay</string>
+    <string name="deleteBtn">Xoa</string>
+    <string name="saveBtn">Them</string>
+    <string name="goToBtn">Vao Trang</string>
+    <string name="title">Tieu de</string>
+    <string name="website">Ten trang</string>
+    <string name="author">Tac gia</string>
+    <string name="comment">Binh luan</string>
+    <string name="fragmentalert">Thong bao</string>
+    <string name="fragmentadd">Them vao yeu thich</string>
+    <string name="fragmentdelete">Ban muon xoa khong</string>
+    <string name="fragmentdl">Xoa</string>
+    <string name="fragmentcancel">Huy</string>
+</resources>

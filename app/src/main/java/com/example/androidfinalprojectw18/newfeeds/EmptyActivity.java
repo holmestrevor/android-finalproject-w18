@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.androidfinalprojectw18.R;
 
 public class EmptyActivity extends AppCompatActivity {
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

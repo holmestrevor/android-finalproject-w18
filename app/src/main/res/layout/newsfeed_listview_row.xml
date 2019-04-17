@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/newsfeed_listview_row_title"
-        android:text="This is a sample title"
+        android:text="@string/titleexample"
+        android:textColor="@color/design_default_color_primary"
         android:textSize="25dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -16,14 +17,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/newsfeed_listview_row_title"
-        android:text="website"
+        android:text="@string/websitename"
         android:id="@+id/newsfeed_listview_row_site"
         android:layout_alignParentLeft="true"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/newsfeed_listview_row_title"
-        android:text=" author name"
+        android:text="@string/author"
         android:layout_toRightOf="@id/newsfeed_listview_row_site"
         android:paddingLeft="20dp"
         android:id="@+id/newsfeed_listview_row_author"/>

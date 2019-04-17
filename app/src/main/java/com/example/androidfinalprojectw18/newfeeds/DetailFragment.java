@@ -35,9 +35,17 @@ public class DetailFragment extends Fragment {
     public void setTablet(boolean tablet) { isTablet = tablet; }
 
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         dataFromActivity = getArguments();
         url = dataFromActivity.getString("url");
@@ -93,7 +101,7 @@ public class DetailFragment extends Fragment {
             newRowValues.put(MyDatabaseOpenHelper.COL_TEXT, text.getText().toString());
             dbID = db.insert(MyDatabaseOpenHelper.TABLE_NAME, null, newRowValues);
             if (dbID > 0){
-                Snackbar.make(gobtn, "Added to favorite", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(gobtn, R.string.fragmentadd, Snackbar.LENGTH_LONG).show();
             }
             deleteButton.setVisibility(View.GONE);
             saveBtn.setVisibility(View.GONE);
@@ -109,9 +117,15 @@ public class DetailFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
             //This is the builder pattern, just call many functions on the same object:
-            AlertDialog dialog = builder.setTitle("Alert!")
-                    .setMessage("Do you want to delete?")
-                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            AlertDialog dialog = builder.setTitle(R.string.fragmentalert)
+                    .setMessage(R.string.fragmentdelete)
+                    .setPositiveButton(R.string.fragmentdl, new DialogInterface.OnClickListener() {
+
+                        /**
+                         *
+                         * @param dialog
+                         * @param which
+                         */
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -134,11 +148,12 @@ public class DetailFragment extends Fragment {
                         }
                     })
                     //If you click the "Cancel" button:
-                    .setNegativeButton("Cancel", (d,w) -> {  /* nothing */})
+                    .setNegativeButton(R.string.fragmentcancel, (d,w) -> {  /* nothing */})
                     .create();
 
             //then show the dialog
             dialog.show();
+
             if(isTablet) { //both the list and details are on the screen:
 //                FragmentExample parent = (FragmentExample)getActivity();
 //                parent.deleteMessageId((int)id); //this deletes the item and updates the list
