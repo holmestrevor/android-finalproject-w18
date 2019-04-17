@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 i = new Intent(this, FlightStatusTracker.class);
                 break;
             case R.id.articleSearchButton:
-                i = new Intent(this, ArticleSearchNYT.class);
+                i = new Intent(this, com.example.androidfinalprojectw18.newyorktimes.MainActivity.class);
                 break;
             default:
                 i = new Intent(this, MerriamWebsterDictionary.class);

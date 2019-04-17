@@ -326,7 +326,7 @@ public class FlightStatusTracker extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.flight_to_nyt:
-                intent = new Intent(this, ArticleSearchNYT.class);
+                intent = new Intent(this, com.example.androidfinalprojectw18.newyorktimes.MainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.flight_to_dictionary:

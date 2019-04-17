@@ -7,5 +7,6 @@
     <color name="colorMedGray">#25252a</color>
     <color name="colorLightGray">#BBBBBB</color>
     <color name="toolbar_color_control_normal">#ffffff</color>
+    <color name="colorBlack">#000000</color>
 
 </resources>

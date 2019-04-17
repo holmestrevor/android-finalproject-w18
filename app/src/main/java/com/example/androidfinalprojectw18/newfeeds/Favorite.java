@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.androidfinalprojectw18.ArticleSearchNYT;
 import com.example.androidfinalprojectw18.FlightStatusTracker;
 import com.example.androidfinalprojectw18.R;
+import com.example.androidfinalprojectw18.newyorktimes.MainActivity;
 import com.example.androidfinalprojectw18.websterdictionary.MerriamWebsterDictionary;
 
 import java.util.ArrayList;
@@ -161,7 +162,7 @@ public class Favorite extends AppCompatActivity {
                 break;
 
             case R.id.ArticleSearchNYT:
-                Intent article = new Intent(this, ArticleSearchNYT.class );
+                Intent article = new Intent(this, MainActivity.class );
                 startActivityForResult(article, 39);
 
                 break;

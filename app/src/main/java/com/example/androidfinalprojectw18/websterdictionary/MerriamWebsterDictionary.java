@@ -200,7 +200,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
                 startActivity(i);
                 break;
             case R.id.dictionary_to_nyt:
-                i = new Intent(MerriamWebsterDictionary.this, ArticleSearchNYT.class);
+                i = new Intent(MerriamWebsterDictionary.this, com.example.androidfinalprojectw18.newyorktimes.MainActivity.class);
                 startActivity(i);
             default:
                 break;

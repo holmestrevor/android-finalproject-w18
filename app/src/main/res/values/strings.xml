@@ -72,4 +72,24 @@
     <string name="altitude_title">Altitude</string>
     <string name="status_title">Status</string>
     <string name="flight_tracker_delete_button">Delete</string>
+
+    <string name="ny_title">The New York Times</string>
+    <string name="ny_adapter_add">Added to bookmark</string>
+    <string name="ny_adapter_goto">Go to Bookmark</string>
+    <string name="ny_adapter_remove">Removed from bookmark</string>
+    <string name="ny_detail_readmore">Read more</string>
+    <string name="ny_searchdialog_title">Search story</string>
+    <string name="ny_searchdialog_hint">Enter text to search</string>
+    <string name="ny_searchdialog_searchbtn">Search</string>
+    <string name="ny_searchdialog_cancelbtn">Cancel</string>
+    <string name="ny_helpdialog_title">Help Menu</string>
+    <string name="ny_helpdialog_stdName">Student name:</string>
+    <string name="ny_helpdialog_stdName2">Ba Phuc Nguyen</string>
+    <string name="ny_helpdialog_appName">App name:</string>
+    <string name="ny_helpdialog_appName2">The New York Times</string>
+    <string name="ny_helpdialog_help">Click on the search button and enter term you want to search. Click to bookmark button to add to Bookmark page for read later, click again to remove from Bookmark Page</string>
+    <string name="ny_helpdialog_closebtn">Close</string>
+    <string name ="ny_menu_dictinary">Dictionary</string>
+    <string name ="ny_menu_newsfeed">News Feed</string>
+    <string name ="ny_menu_flight">Flight Tracker</string>
 </resources>

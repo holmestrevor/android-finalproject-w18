@@ -20,5 +20,19 @@
         <!-- Customize color of navigation drawer icon and back arrow -->
         <item name="colorControlNormal">@color/toolbar_color_control_normal</item>
     </style>
+    <!--Customize font for the title-->
+    <style name="NewYorkTimesFont">
+        <item name="android:fontFamily">@font/newyorktimes</item>
+    </style>
+    <style name="NewYorkTimesColor" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/colorBlack</item>
+    </style>
+    <!--enable fullscreen mode-->
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
 </resources>

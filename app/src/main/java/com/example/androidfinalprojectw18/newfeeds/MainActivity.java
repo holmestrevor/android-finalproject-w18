@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.ArticleSearchNYT:
-                 Intent article = new Intent(this, ArticleSearchNYT.class );
+                 Intent article = new Intent(this, com.example.androidfinalprojectw18.newyorktimes.MainActivity.class );
                  startActivityForResult(article, 39);
 
                  break;

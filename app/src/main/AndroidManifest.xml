@@ -35,6 +35,14 @@
         <activity android:name=".newfeeds.EmptyActivity"/>
         <activity android:name=".newfeeds.Favorite"/>
 
+        <activity android:name=".newyorktimes.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity android:name=".newyorktimes.Empty"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity android:name=".newyorktimes.Bookmark"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <supports-screens android:requiresSmallestWidthDp="600" />

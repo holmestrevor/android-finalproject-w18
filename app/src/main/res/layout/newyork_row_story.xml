@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/rowImage"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:focusable="false"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/author"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:textColor="@color/colorLightGray"
+        android:layout_below="@id/rowImage"
+        android:focusable="false"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/author"
+        android:textSize="30dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorBlack"
+        android:id="@+id/title"
+        android:focusable="false"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bookmarkBtn"
+        android:src="@drawable/ic_ny_bookmark_on"
+        android:background="@null"
+        android:layout_below="@id/title"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:paddingTop="10dp"/>
+
+
+</RelativeLayout>
