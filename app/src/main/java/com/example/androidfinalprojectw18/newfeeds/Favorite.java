@@ -1,15 +1,11 @@
 package com.example.androidfinalprojectw18.newfeeds;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,8 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,12 +23,6 @@ import com.example.androidfinalprojectw18.FlightStatusTracker;
 import com.example.androidfinalprojectw18.R;
 import com.example.androidfinalprojectw18.websterdictionary.MerriamWebsterDictionary;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class Favorite extends AppCompatActivity {
@@ -161,8 +149,17 @@ public class Favorite extends AppCompatActivity {
                 break;
             case R.id.newsfeed_menu_help:
                 //Show the toast immediately:
-                Toast.makeText(this, "Clicked on help button", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Author’s name Toan Dinh" +
+                        " Activity version number: 1.0" +
+                        " How to use my application: You type name of article " +
+                        " that you want to search then click Search button. " +
+                        " A list of articles will appear " +
+                        " Click on the artcile which you want to read. you will see its detial." +
+                        " you can choose 'ADD TO FAVORITE' or 'VISIT WEBSITE' " +
+                        " ADD TO FAVORITE: save the article in your favorite window)  " +
+                        " VISIT WEBSITE: go to the website which contains the article" , Toast.LENGTH_LONG).show();
                 break;
+
             case R.id.ArticleSearchNYT:
                 Intent article = new Intent(this, ArticleSearchNYT.class );
                 startActivityForResult(article, 39);
@@ -178,7 +175,6 @@ public class Favorite extends AppCompatActivity {
                 Intent web = new Intent(this, MerriamWebsterDictionary.class);
                 startActivityForResult(web,41);
                 break;
-
 
             //Snackbar code:
 //                Snackbar sb = Snackbar.make(toolbar, "This is the Snackbar", Snackbar.LENGTH_LONG)

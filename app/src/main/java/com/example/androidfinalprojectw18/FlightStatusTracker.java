@@ -1,21 +1,19 @@
 package com.example.androidfinalprojectw18;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.SnackbarContentLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidfinalprojectw18.newfeeds.MainActivity;
 import com.example.androidfinalprojectw18.websterdictionary.MerriamWebsterDictionary;
 
 import org.json.JSONArray;
@@ -45,7 +44,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FlightStatusTracker extends AppCompatActivity {
@@ -336,7 +334,7 @@ public class FlightStatusTracker extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.flight_to_newsfeed:
-                intent = new Intent(this, NewsFeed.class);
+                intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.flight_help:
