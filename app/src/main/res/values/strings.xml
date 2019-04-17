@@ -30,6 +30,7 @@
     <string name="flight_tracker_help">Help</string>
     <string name="flight_help_text">Created by Adam White\nVersion:1.0.0\nThis collects flight tracking statuses</string>
 
+
     <!--Newfeeds-->
     <string name="Entertosearch">Enter to search</string>
     <string name="Search">Search</string>
@@ -53,4 +54,13 @@
     <string name="fragmentdl">Deleted</string>
     <string name="fragmentcancel">Cancel</string>
 
+    <string name="flight_number">Flight number</string>
+    <string name="flight_arrival">Arriving at airport</string>
+    <string name="flight_tracker_edit_text_hint">Enter airport code</string>
+    <string name="flight_button_text">Search</string>
+    <string name="latitude_title">Latitude</string>
+    <string name="longitude_title">Longitude</string>
+    <string name="altitude_title">Altitude</string>
+    <string name="status_title">Status</string>
+    <string name="flight_tracker_delete_button">Delete</string>
 </resources>

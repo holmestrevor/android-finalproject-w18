@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".FlightTrackerEmptyActivity"></activity>
         <activity android:name=".websterdictionary.ViewDictionaryItem"></activity>
         <activity android:name=".ArticleSearchNYT" />
         <activity android:name=".FlightStatusTracker" />
@@ -30,5 +31,6 @@
         <activity android:name=".newfeeds.Favorite"/>
 
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <supports-screens android:requiresSmallestWidthDp="600" />
 </manifest>
