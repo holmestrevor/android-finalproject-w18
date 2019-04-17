@@ -61,6 +61,7 @@ public class WebsterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataFromActivity = getArguments();
         id = dataFromActivity.getLong(DBOpener.COL_ID);
+        boolean fromSaved = dataFromActivity.getBoolean("fromSaved");
 
         View result = inflater.inflate(R.layout.activity_webster_fragment, container, false);
         wordView = (TextView)result.findViewById(R.id.wordExpanded);
@@ -86,12 +87,21 @@ public class WebsterFragment extends Fragment {
                 pronunciationView.setText(c.getString(c.getColumnIndex(DBOpener.COL_PRONUNCIATION)));
 
                 StringBuilder sb = new StringBuilder();
-
-                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION0)) + "\n");
-                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION1)) + "\n");
-                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION2)) + "\n");
-                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION3)) + "\n");
-                sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION4)) + "\n");
+                if(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION0))!=null) {
+                    sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION0)) + "\n");
+                }
+                if(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION1))!=null) {
+                    sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION1)) + "\n");
+                }
+                if(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION2))!=null) {
+                    sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION2)) + "\n");
+                }
+                if(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION3))!=null) {
+                    sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION3)) + "\n");
+                }
+                if(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION4))!=null) {
+                    sb.append(c.getString(c.getColumnIndex(DBOpener.COL_DEFINITION4)) + "\n");
+                }
                 definitionsView.setText(sb.toString());
 
             }
@@ -157,17 +167,31 @@ public class WebsterFragment extends Fragment {
                 cv.clear();
                 db.close();
                 dbOpener.close();
+                if(isTablet) {
+                    MerriamWebsterDictionary parent = (MerriamWebsterDictionary)getActivity();
+                    parent.refreshItems(parent.findViewById(R.id.wordList));
+                    parent.getSupportFragmentManager()
+                            .beginTransaction()
+                            .remove(this)
+                            .commit();
+                } else {
+                    MerriamEmpty parent = (MerriamEmpty)getActivity();
+                    Intent backToParent = new Intent();
+
+                    parent.setResult(Activity.RESULT_OK, backToParent);
+                    parent.finish();
+                }
             });
         }
 
-        return null;
+        return result;
     }
 
     /**
      * A method to check if the word that the user is attempting to save already exists in the database.
      * @param word The word that needs to be compared with database entries
      * @param db the SQLiteDatabase Object
-     * @return
+     * @return true if there is a duplicate, false if there are none
      */
     public boolean checkForDuplicates(String word, SQLiteDatabase db) {
         Cursor c = db.query(false,
@@ -250,36 +274,75 @@ public class WebsterFragment extends Fragment {
                     }
                     if(parser.getName().equals("pr")) {
                         if(pronunciation!=null) {
-                            break;
+                            continue;
                         }
                         pronunciation = parser.nextText();
                         publishProgress(50);
                     }
+//                    if(parser.getName().equals("dt")) {
+//                        if(i>=5) {
+//                            break;
+//                        }
+//                        parser.next();
+//                        if(parser.getName()!= null && parser.getName().equals("un")) {
+//                            definitions[i] = parser.nextText();
+//                            i++;
+//                            continue;
+//                        } else {
+//                            definitions[i] = parser.getText();
+//                        }
+//                        if(definitions[i].trim().equals(":")) {
+//                            do {
+//                                parser.next();
+//                                if(parser.getEventType()==XmlPullParser.START_TAG && parser.getName().equals("sx")) {
+//                                    if(i>=5) {
+//                                        break;
+//                                    }
+//                                    parser.next();
+//                                    definitions[i] = parser.getText();
+//                                    i++;
+//                                }
+//                            } while(parser.getEventType()!=XmlPullParser.START_TAG);
+//                        } else {
+//                            i++;
+//                        }
+//                    }
                     if(parser.getName().equals("dt")) {
+                        Log.i("HERE", "HERE");
                         if(i>=5) {
                             break;
                         }
-                        parser.next();
-                        Log.i("parser", parser.getText());
-                        definitions[i] = parser.getText();
-                        if(definitions[i].trim().equals(":")) {
+                        String s = "";
+                        if(parser.next()==XmlPullParser.TEXT) {
+                            s = parser.getText();
                             do {
                                 parser.next();
-                                if(parser.getEventType()==XmlPullParser.START_TAG && parser.getName().equals("sx")) {
-                                    if(i>=5) {
-                                        break;
-                                    }
-                                    parser.next();
-                                    definitions[i] = parser.getText();
-                                    if(!definitions[i].startsWith(":")) {
-                                        definitions[i] = ":" + definitions[i];
-                                    }
-                                    i++;
-                                }
                             } while(parser.getEventType()!=XmlPullParser.START_TAG);
-                        } else {
+                        }
+                        if(s==null) {
+                            continue;
+                        }
+                        if(s.trim().equals(":")) {
+                            continue;
+                        }
+                        if(s.length()>0) {
+                            definitions[i] = s;
                             i++;
                         }
+                    }
+                    if(parser.getName().equals("sx")) {
+                        if(i>=5) {
+                            break;
+                        }
+                        definitions[i] = parser.nextText();
+                        i++;
+                    }
+                    if(parser.getName().equals("un")) {
+                        if(i>=5) {
+                            break;
+                        }
+                        definitions[i] = parser.nextText();
+                        i++;
                     }
                 }
                 publishProgress(100);

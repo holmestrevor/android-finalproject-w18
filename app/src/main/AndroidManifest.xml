@@ -12,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".websterdictionary.MerriamEmpty"></activity>
-        <activity android:name=".websterdictionary.ViewDictionaryItem" />
+        <activity android:name=".websterdictionary.MerriamEmpty">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.androidfinalprojectw18.websterdictionary.MerriamWebsterDictionary" />
+        </activity>
         <activity android:name=".ArticleSearchNYT" />
         <activity android:name=".FlightStatusTracker" />
         <activity android:name=".NewsFeed" />

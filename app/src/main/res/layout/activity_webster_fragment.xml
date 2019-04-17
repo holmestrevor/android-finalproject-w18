@@ -20,7 +20,8 @@
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/wordExpanded"/>
+        android:layout_below="@id/wordExpanded"
+        android:paddingStart="5dp"/>
 
     <TextView
         android:id="@+id/definitionsExpanded"
@@ -29,7 +30,8 @@
         android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pronunciationExpanded"/>
+        android:layout_below="@id/pronunciationExpanded"
+        android:paddingStart="5dp"/>
 
     <Button
         android:id="@+id/saveButton"
@@ -37,7 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/definitionsExpanded"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:paddingStart="5dp"/>
 
     <Button
         android:id="@+id/deleteButton"
@@ -45,7 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/definitionsExpanded"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:paddingStart="5dp"/>
 
     <ProgressBar
         android:id="@+id/dictionaryProgressBar"

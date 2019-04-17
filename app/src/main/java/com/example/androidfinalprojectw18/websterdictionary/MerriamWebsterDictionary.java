@@ -1,7 +1,6 @@
 package com.example.androidfinalprojectw18.websterdictionary;
 
-import android.content.ContentValues;
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -16,12 +15,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.support.v7.widget.Toolbar;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidfinalprojectw18.ArticleSearchNYT;
@@ -32,7 +31,6 @@ import com.example.androidfinalprojectw18.websterdictionary.dbopener.DBOpener;
 import com.example.androidfinalprojectw18.websterdictionary.listview.DictionaryItem;
 import com.example.androidfinalprojectw18.websterdictionary.listview.DictionaryItemAdapter;
 
-import java.nio.channels.NotYetBoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,7 +38,8 @@ import java.util.List;
 public class MerriamWebsterDictionary extends AppCompatActivity {
 
     //ListViews containing dictionary items & recently searched items respectively
-    ListView wordList, recentList;
+    ListView wordList;
+    TextView recentList;
     //ArrayList containing dictionary objects, to be passed into ListView
     ArrayList<DictionaryItem> words;
     //ArrayList containing one item; the most recently searched word.
@@ -54,10 +53,19 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        recentList.setText(preferences.getString("word", ""));
+        //Deleting an item
         if(requestCode==15) {
             if(resultCode==RESULT_OK) {
                 long id = data.getLongExtra(DBOpener.COL_ID, 0);
                 deleteMessage(id);
+                Toast.makeText(this, "Item successfully deleted.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        //An item was saved, refresh items
+        if(requestCode==30) {
+            if(resultCode==RESULT_OK){
+                refreshItems(wordList);
             }
         }
     }
@@ -115,11 +123,11 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
                 fragment.setTablet(true);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .add(R.id.fragmentPosition, fragment)
+                        .add(R.id.tabletFragmentPos, fragment)
                         .addToBackStack("AnyName")
                         .commit();
             } else {
-                Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
+                Intent i = new Intent(MerriamWebsterDictionary.this, MerriamEmpty.class);
                 i.putExtras(dataToPass);
                 startActivityForResult(i, 15);
             }
@@ -127,13 +135,17 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
 
         recentList = findViewById(R.id.recentList);
         preferences = getSharedPreferences("webster", MODE_PRIVATE);
+        recentList.setText(preferences.getString("word", ""));
+        recentList.setVisibility(View.VISIBLE);
 
-        recentList.setOnItemClickListener((parent, view, position, id) -> {
-            Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
-            Bundle dataToPass = new Bundle();
-            i.putExtra("word", preferences.getString("word", ""));
-            i.putExtra("fromSaved", false);
-        });
+//        recentList.setOnItemClickListener((parent, view, position, id) -> {
+//            Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
+//            Bundle dataToPass = new Bundle();
+//            dataToPass.putBoolean("fromSaved", false);
+//            dataToPass.putLong(DBOpener.COL_ID, words.get(position).getId());
+//            i.putExtras(dataToPass);
+//            startActivity(i);
+//        });
 
     }
 
@@ -147,15 +159,16 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                searchView.clearFocus();
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("word", query);
                 editor.apply();
-                Intent i = new Intent(MerriamWebsterDictionary.this, ViewDictionaryItem.class);
+                Intent i = new Intent(MerriamWebsterDictionary.this, MerriamEmpty.class);
                 Bundle dataToPass = new Bundle();
                 dataToPass.putString("searchWord", query);
                 dataToPass.putBoolean("fromSaved", false);
                 i.putExtras(dataToPass);
-                startActivity(i);
+                startActivityForResult(i, 30);
                 return true;
             }
 
@@ -224,7 +237,8 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
      * @param view
      */
     public void refreshItems(View view) {
-        words = loadItems();
+        words.clear();
+        words.addAll(loadItems());
         adt.notifyDataSetChanged();
         Snackbar.make(view, "Items were refreshed.", Snackbar.LENGTH_SHORT)
                 .setAction("Okay", b -> {

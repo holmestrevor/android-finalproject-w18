@@ -19,20 +19,20 @@
 
     <item
         android:id="@+id/dictionary_to_flight"
-        android:icon="@drawable/flight_tracker_to_dictionary"
+        android:icon="@drawable/icons8_airport_48"
         android:title="@string/flight_tracker_to_webster_dictionary"
         android:orderInCategory="2"
         app:showAsAction="always"/>
     <item
         android:id="@+id/dictionary_to_newsfeed"
-        android:icon="@drawable/flight_tracker_to_newsfeed"
+        android:icon="@drawable/icons8_blog_48"
         android:title="@string/flight_tracker_to_news_feed"
         android:orderInCategory="3"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/dictionary_to_nyt"
-        android:icon="@drawable/flight_tracker_to_nyt"
+        android:icon="@drawable/icons8_us_news_48"
         android:title="@string/flight_tracker_to_nyt_article_search"
         android:orderInCategory="1"
         app:showAsAction="always"/>

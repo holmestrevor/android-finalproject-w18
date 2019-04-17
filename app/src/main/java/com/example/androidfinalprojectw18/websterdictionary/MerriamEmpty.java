@@ -16,9 +16,11 @@ public class MerriamEmpty extends AppCompatActivity {
 
         WebsterFragment fragment = new WebsterFragment();
         fragment.setArguments(dataToPass);
-        fragment.setTablet(true);
+        fragment.setTablet(false);
         getSupportFragmentManager()
-                .beginTransaction();
+                .beginTransaction()
+                .add(R.id.fragmentPosition, fragment)
+                .commit();
 
     }
 }

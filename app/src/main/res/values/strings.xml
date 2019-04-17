@@ -22,8 +22,14 @@
     <string name="delete_confirm">Yes, I\'m sure</string>
     <string name="delete_success">All items successfully deleted</string>
     <string name="no">No</string>
+    <string name="refresh">Refresh</string>
+    <string name="delete_all_items">Delete all items</string>
+    <string name="recently_searched">Recently Searched</string>
+    <string name="most_recent_search">Most Recent Search</string>
 
-    <!--activity_view_dictionary_item.xml-->
+    <!--activity_webster_fragment.xml-->
+    <string name="save_word">Save Word</string>
+    <string name="delete_word">Delete Word</string>
     <string name="no_words_found">No words found.</string>
     <string name="suggestions">Here are some suggestions:</string>
 
@@ -33,10 +39,5 @@
     <string name="flight_tracker_to_webster_dictionary">Webster Dictionary</string>
     <string name="flight_tracker_help">Help</string>
     <string name="flight_help_text">Created by Adam White\nVersion:1.0.0\nThis collects flight tracking statuses</string>
-    <string name="no_searches">You have not searched any definitions recently.</string>
-    <string name="save_word">Save Word</string>
-    <string name="delete_word">Delete Word</string>
-    <string name="refresh">Refresh</string>
-    <string name="delete_all_items">Delete all items</string>
-    <string name="recently_searched">Recently Searched</string>
+
 </resources>
