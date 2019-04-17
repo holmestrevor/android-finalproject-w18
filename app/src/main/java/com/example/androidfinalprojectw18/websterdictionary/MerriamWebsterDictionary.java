@@ -25,7 +25,8 @@ import android.widget.Toast;
 
 import com.example.androidfinalprojectw18.ArticleSearchNYT;
 import com.example.androidfinalprojectw18.FlightStatusTracker;
-import com.example.androidfinalprojectw18.NewsFeed;
+import com.example.androidfinalprojectw18.MainActivity;
+import com.example.androidfinalprojectw18.newfeeds.Favorite;
 import com.example.androidfinalprojectw18.R;
 import com.example.androidfinalprojectw18.websterdictionary.dbopener.DBOpener;
 import com.example.androidfinalprojectw18.websterdictionary.listview.DictionaryItem;
@@ -198,7 +199,7 @@ public class MerriamWebsterDictionary extends AppCompatActivity {
                 startActivity(i);
                 break;
             case R.id.dictionary_to_newsfeed:
-                i = new Intent(MerriamWebsterDictionary.this, NewsFeed.class);
+                i = new Intent(MerriamWebsterDictionary.this, Favorite.class);
                 startActivity(i);
                 break;
             case R.id.dictionary_to_nyt:
