@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ny_title">The New York Times</string>
+    <string name="ny_adapter_add">Them vao bookmark</string>
+    <string name="ny_adapter_goto">di den Bookmark</string>
+    <string name="ny_adapter_remove">xoa khoi bookmark</string>
+    <string name="ny_detail_readmore">Doc them</string>
+    <string name="ny_searchdialog_title">Tim kiem</string>
+    <string name="ny_searchdialog_hint">Nhap vao de tim kiem</string>
+    <string name="ny_searchdialog_searchbtn">Tim kiem</string>
+    <string name="ny_searchdialog_cancelbtn">Huy</string>
+    <string name="ny_helpdialog_title">Tro giup</string>
+    <string name="ny_helpdialog_stdName">Hoc sinh:</string>
+    <string name="ny_helpdialog_stdName2">Nguyen ba Phuc</string>
+    <string name="ny_helpdialog_appName">Ten phan mem</string>
+    <string name="ny_helpdialog_appName2">The New York Times</string>
+    <string name="ny_helpdialog_help">Do ba má chồng nói chưa chơi hết game ở Vinpearl lần trước, nên lần này lại đi Vinpearl Nam Hội An lần nữa, nhận phòng khách sạn</string>
+    <string name="ny_helpdialog_closebtn">Tat</string>
+    <string name ="ny_menu_dictinary">Dictionary</string>
+    <string name ="ny_menu_newsfeed">News Feed</string>
+    <string name ="ny_menu_flight">Flight Tracker</string>
+</resources>

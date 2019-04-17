@@ -2,7 +2,9 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="20dp">
+    android:paddingBottom="20dp"
+    android:descendantFocusability="blocksDescendants"
+    >
 
     <ImageView
         android:layout_width="match_parent"
@@ -13,48 +15,41 @@
         android:id="@+id/rowImage"
         android:src="@drawable/story_image_example"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:focusable="false"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/author"
-        android:text="Author"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
         android:textSize="15dp"
         android:textColor="@color/colorLightGray"
-        android:layout_below="@id/rowImage"/>
+        android:layout_below="@id/rowImage"
+        android:focusable="false"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/author"
-        android:text="This is the title"
         android:textSize="30dp"
         android:layout_marginLeft="10dp"
         android:textColor="@color/colorBlack"
         android:id="@+id/title"
+        android:focusable="false"
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:text=" text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
- text text text text text text text text text text text text text text text text text text text text text text text text"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/headLine"/>
+
     <ImageButton
-        android:id="@+id/bookmarkBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/headLine"
+        android:id="@+id/bookmarkBtn"
         android:src="@drawable/ic_ny_bookmark_on"
         android:background="@null"
+        android:layout_below="@id/title"
         android:layout_alignParentRight="true"
-        android:paddingRight="30dp"
-        android:paddingTop="10dp"
-        android:focusable="false"/>
+        android:layout_marginRight="30dp"
+        android:paddingTop="10dp"/>
+
 
 </RelativeLayout>

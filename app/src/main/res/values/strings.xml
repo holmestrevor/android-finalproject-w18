@@ -22,6 +22,7 @@
     <string name="delete_confirm">Yes, I\'m sure</string>
     <string name="delete_success">All items successfully deleted</string>
     <string name="no">No</string>
+    <string name="delete_word">Delete</string>
 
     <!--activity_view_dictionary_item.xml-->
     <string name="no_words_found">No words found.</string>
@@ -35,5 +36,27 @@
     <string name="flight_help_text">Created by Adam White\nVersion:1.0.0\nThis collects flight tracking statuses</string>
     <string name="no_searches">You have not searched any definitions recently.</string>
     <string name="save_word">Save Word</string>
-    <string name="delete_word">Delete Word</string>
+
+
+    <!--NewYorksTime-->
+    <!--NewYorksTime-->
+    <string name="ny_title">The New York Times</string>
+    <string name="ny_adapter_add">Added to bookmark</string>
+    <string name="ny_adapter_goto">Go to Bookmark</string>
+    <string name="ny_adapter_remove">Removed from bookmark</string>
+    <string name="ny_detail_readmore">Read more</string>
+    <string name="ny_searchdialog_title">Search story</string>
+    <string name="ny_searchdialog_hint">Enter text to search</string>
+    <string name="ny_searchdialog_searchbtn">Search</string>
+    <string name="ny_searchdialog_cancelbtn">Cancel</string>
+    <string name="ny_helpdialog_title">Help Menu</string>
+    <string name="ny_helpdialog_stdName">Student name:</string>
+    <string name="ny_helpdialog_stdName2">Ba Phuc Nguyen</string>
+    <string name="ny_helpdialog_appName">App name:</string>
+    <string name="ny_helpdialog_appName2">The New York Times</string>
+    <string name="ny_helpdialog_help">Click on the search button and enter term you want to search. Click to bookmark button to add to Bookmark page for read later, click again to remove from Bookmark Page</string>
+    <string name="ny_helpdialog_closebtn">Close</string>
+    <string name ="ny_menu_dictinary">Dictionary</string>
+    <string name ="ny_menu_newsfeed">News Feed</string>
+    <string name ="ny_menu_flight">Flight Tracker</string>
 </resources>

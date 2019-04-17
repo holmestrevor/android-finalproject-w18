@@ -23,11 +23,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".newfeeds.MainActivity"/>
-        <activity android:name=".newfeeds.EmptyActivity"/>
-        <activity android:name=".newfeeds.Favorite"/>
 
         <activity android:name=".newyorktimes.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity android:name=".newyorktimes.Empty"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+        <activity android:name=".newyorktimes.Bookmark"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
 
     </application>

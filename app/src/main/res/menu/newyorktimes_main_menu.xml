@@ -7,9 +7,28 @@
         android:orderInCategory="1"
         app:showAsAction="always"
         app:actionLayout="@layout/newyork_custom_action_item_layout"/>
-    <item android:id="@+id/help"
-        android:icon="@drawable/ic_ny_help"
+    <item android:id="@+id/search"
+        android:icon="@drawable/ic_ny_search"
         android:orderInCategory="2"
         app:showAsAction="always"/>
+    <item android:id="@+id/help"
+        android:icon="@drawable/ic_ny_help"
+        android:orderInCategory="3"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_dictionary"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:title="@string/ny_menu_dictinary"/>
+    <item
+        android:id="@+id/menu_newsfeed"
+        android:orderInCategory="2"
+        app:showAsAction="never"
+        android:title="@string/ny_menu_newsfeed"/>
+    <item
+        android:id="@+id/menu_flight"
+        android:orderInCategory="2"
+        app:showAsAction="never"
+        android:title="@string/ny_menu_flight"/>
 
 </menu>

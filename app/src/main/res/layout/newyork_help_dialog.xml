@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ny_helpdialog_title"
+        android:textSize="30dp"
+        android:textColor="@color/colorBlack"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/title"/>
+    <TextView
+        android:layout_below="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ny_helpdialog_stdName"
+        android:id="@+id/nameTV"
+        android:layout_marginLeft="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ny_helpdialog_stdName2"
+        android:layout_toRightOf="@id/nameTV"
+        android:id="@+id/nameTV2"
+        android:layout_below="@id/title"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ny_helpdialog_appName"
+        android:id="@+id/appNameTV"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@id/nameTV"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ny_helpdialog_appName2"
+        android:layout_toRightOf="@id/nameTV"
+        android:id="@+id/appNameTV2"
+        android:layout_below="@id/nameTV"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appNameTV"
+        android:text="@string/ny_helpdialog_help"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/helpTV"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/closeBtn"
+        android:background="@drawable/button_bg"
+        android:text="@string/ny_helpdialog_closebtn"
+        android:layout_below="@id/helpTV"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"/>
+
+
+</RelativeLayout>
