@@ -30,5 +30,14 @@
     <string name="flight_tracker_to_webster_dictionary">Dictionnaire Webster</string>
     <string name="flight_tracker_help">Aidez-moi</string>
     <string name="flight_help_text">Créé par Adam White \ nVersion: 1.0.0 \ nCeci collecte les états de suivi des vols.</string>
+    <string name="flight_number">Numéro de vol</string>
+    <string name="flight_arrival">Arriver à l\'aéroport</string>
+    <string name="flight_tracker_edit_text_hint">Entrez le code de l\'aéroport</string>
+    <string name="flight_button_text">Chercher</string>
+    <string name="latitude_title">Latitude</string>
+    <string name="longitude_title">Longitude</string>
+    <string name="altitude_title">Altitude</string>
+    <string name="status_title">Statut</string>
+    <string name="flight_tracker_delete_button">Effacer</string>
 
 </resources>

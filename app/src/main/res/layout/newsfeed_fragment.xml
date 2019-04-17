@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/toolbar_color_control_normal"
+    android:id="@+id/fragmentLocation"
+    android:scrollbars="vertical">
+
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:text="@string/backBnt"
+        android:id="@+id/backBtn"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/progressBar"
+        android:background="@drawable/buttondesign"
+     />/>
+
+
+    <TextView
+        android:layout_below="@id/backBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:textSize="20dp"
+        android:textColor="@color/design_default_color_primary"
+        android:text="@string/title"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:id="@+id/website"
+        android:text="@string/website"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/website"
+        android:id="@+id/author"
+        android:text="@string/author"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/author"
+        android:id="@+id/text"
+        android:text="@string/comment"
+        android:scrollbars="vertical"/>
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:id="@+id/saveBtn"
+        android:text="@string/saveBtn"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/buttondesign"/>
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:id="@+id/deleteBtn"
+        android:text="@string/deleteBtn"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/buttondesign"/>
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:id="@+id/goToBtn"
+        android:text="@string/goToBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/buttondesign"/>
+
+</RelativeLayout>
