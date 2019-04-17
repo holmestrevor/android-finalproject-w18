@@ -40,5 +40,14 @@
     <string name="most_recent_search">Recherche La Plus Récente</string>
     <string name="delete_word">Effacer</string>
     <string name="delete_all_items">Supprimer les éléments</string>
+    <string name="flight_number">Numéro de vol</string>
+    <string name="flight_arrival">Arriver à l\'aéroport</string>
+    <string name="flight_tracker_edit_text_hint">Entrez le code de l\'aéroport</string>
+    <string name="flight_button_text">Chercher</string>
+    <string name="latitude_title">Latitude</string>
+    <string name="longitude_title">Longitude</string>
+    <string name="altitude_title">Altitude</string>
+    <string name="status_title">Statut</string>
+    <string name="flight_tracker_delete_button">Effacer</string>
 
 </resources>

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 i = new Intent(this, MerriamWebsterDictionary.class);
                 break;
             case R.id.newsFeedButton:
-                i = new Intent(this, NewsFeed.class);
+                i = new Intent(this, com.example.androidfinalprojectw18.newfeeds.MainActivity.class);
                 break;
             case R.id.flightStatusButton:
                 i = new Intent(this, FlightStatusTracker.class);

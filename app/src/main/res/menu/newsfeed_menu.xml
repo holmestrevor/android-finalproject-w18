@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/newsfeed_menu_saved"
+        android:icon="@drawable/newfeeds_favourite"
+        android:orderInCategory="4"
+        app:showAsAction="always"/>
+    <item android:id="@+id/newsfeed_menu_help"
+        android:icon="@drawable/newfeeds_help"
+        android:orderInCategory="5"
+        app:showAsAction="always"/>
+    <item android:id="@+id/ArticleSearchNYT"
+        android:icon="@drawable/newfeeds_nyt"
+        android:orderInCategory="3"
+        app:showAsAction="always"/>
+    <item android:id="@+id/FlightStatusTracker"
+        android:icon="@drawable/newfeeds_flight"
+        android:orderInCategory="2"
+        app:showAsAction="always"/>
+    <item android:id="@+id/WebDictionary"
+        android:icon="@drawable/newfeeds_dictionary"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
+
+
+</menu>
