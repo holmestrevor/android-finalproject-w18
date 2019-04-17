@@ -24,7 +24,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidfinalprojectw18.ArticleSearchNYT;
+import com.example.androidfinalprojectw18.FlightStatusTracker;
 import com.example.androidfinalprojectw18.R;
+import com.example.androidfinalprojectw18.websterdictionary.MerriamWebsterDictionary;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -160,6 +163,22 @@ public class Favorite extends AppCompatActivity {
                 //Show the toast immediately:
                 Toast.makeText(this, "Clicked on help button", Toast.LENGTH_LONG).show();
                 break;
+            case R.id.ArticleSearchNYT:
+                Intent article = new Intent(this, ArticleSearchNYT.class );
+                startActivityForResult(article, 39);
+
+                break;
+
+            case R.id.FlightStatusTracker:
+                Intent flight = new Intent(this, FlightStatusTracker.class);
+                startActivityForResult(flight, 40);
+                break;
+
+            case R.id.WebDictionary:
+                Intent web = new Intent(this, MerriamWebsterDictionary.class);
+                startActivityForResult(web,41);
+                break;
+
 
             //Snackbar code:
 //                Snackbar sb = Snackbar.make(toolbar, "This is the Snackbar", Snackbar.LENGTH_LONG)
